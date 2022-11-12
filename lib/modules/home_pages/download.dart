@@ -1,23 +1,31 @@
+
 import 'package:ai_control/models/pdf_model/customer.dart';
 import 'package:ai_control/models/pdf_model/invoice.dart';
 import 'package:ai_control/models/pdf_model/supplier.dart';
 import 'package:ai_control/modules/pdf_api/pdf_api.dart';
 import 'package:ai_control/modules/pdf_api/pdf_invoice_api.dart';
+import 'package:ai_control/shared/components/components.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../bloc/main_cubit/main_states.dart';
 import '../../bloc/main_cubit/mian_cubit.dart';
+import '../../models/class_user_model.dart';
+import '../../shared/constatnts/constants.dart';
 
-class Download extends StatefulWidget {
-  const Download({Key? key}) : super(key: key);
 
-  @override
-  State<Download> createState() => _DownloadState();
-}
 
-class _DownloadState extends State<Download> {
+class Download extends StatelessWidget {
+   Download({Key? key}) : super(key: key);
+
+
+   // UserModel? model;
+
 
 
 
@@ -26,8 +34,18 @@ class _DownloadState extends State<Download> {
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialStutes>(
       listener: (BuildContext context, state) {},
-      builder: (BuildContext context, Object? state) {
-        var model = SocialCubit.get(context).userModel;
+      builder: (BuildContext context, Object? state)  {
+
+
+        // final uId = FirebaseAuth.instance.currentUser?.uid;
+        //
+        // FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
+        //   model = UserModel.fromJson(value.data()!);
+        // });
+         final model = SocialCubit.get(context).userModel;
+
+
+
 
         return Container(
           height: MediaQuery.of(context).size.height,
@@ -97,9 +115,9 @@ class _DownloadState extends State<Download> {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.blueGrey),
                               ),
-                              Expanded(
+                             Expanded(
                                 child: Text(
-                                  model?.name ?? 'loading..',
+                                 '${model?.name}',
                                   style: TextStyle(color: Colors.blueGrey),
                                 ),
                               ),
@@ -152,7 +170,7 @@ class _DownloadState extends State<Download> {
                               ),
                               Expanded(
                                 child: Text(
-                                  model?.phone ?? 'loading..',
+                                  '${model?.phone}',
                                   style: TextStyle(color: Colors.blueGrey),
                                 ),
                               ),

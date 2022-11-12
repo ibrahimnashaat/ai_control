@@ -54,6 +54,11 @@ dependencies:
   path_provider: ^2.0.11
   open_file: ^3.2.1
   intl: ^0.17.0
+  screenshot: ^1.2.3
+  image_gallery_saver: ^1.7.1
+  permission_handler: ^10.2.0
+  share: ^2.0.4
+  gallery_saver: ^2.3.2
 
 dev_dependencies:
   flutter_test:

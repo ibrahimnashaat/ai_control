@@ -4,8 +4,7 @@ class SocialGetUserLoadingStates extends SocialStutes{}
 class SocialGetUserSuccessStates extends SocialStutes{}
 class SocialGetUserErrorStates extends SocialStutes
 {
-  final String error;
-  SocialGetUserErrorStates(this.error);
+
 }
 class ChangBouttomNavStute extends  SocialStutes{}
 class SocialNewPostStates extends  SocialStutes{}
@@ -77,3 +76,28 @@ class SocialGetMessageErrorStates extends SocialStutes
   final String error;
   SocialGetMessageErrorStates(this.error);
 }
+
+
+
+
+class RegisterLoadingStates extends SocialStutes {}
+
+class RegisterSuccessStates extends SocialStutes {}
+
+class RegisterErrorStates extends SocialStutes {
+  late final String error;
+  RegisterErrorStates(this.error);
+}
+
+class RegisterCreateUserSuccessStates extends SocialStutes {
+
+  late String uId;
+  RegisterCreateUserSuccessStates ({required this.uId});
+}
+
+class RegisterCreateUserErrorStates extends SocialStutes {
+  late final String error;
+  RegisterCreateUserErrorStates(this.error);
+}
+
+class PasswordStates extends SocialStutes {}

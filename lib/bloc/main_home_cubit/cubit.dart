@@ -14,6 +14,7 @@ class NeuroCubit extends Cubit<NeuroStates> {
 
   int currentIndex = 0;
 
+
   List<BottomNavigationBarItem> bottomNavItems = const [
 
     BottomNavigationBarItem(
@@ -38,8 +39,7 @@ class NeuroCubit extends Cubit<NeuroStates> {
     emit(NeuroBottomNavState());
   }
 
-
-  List<Widget> screens = const [
+  List<Widget> screens =  [
 
     Patient(),
     Download(),

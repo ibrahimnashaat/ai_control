@@ -1,13 +1,21 @@
+
 import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 
+
+import '../../bloc/main_cubit/mian_cubit.dart';
 import '../../bloc/register_cubit/cubit.dart';
 import '../../bloc/register_cubit/states.dart';
+
+import '../../models/class_user_model.dart';
+import '../../shared/constatnts/constants.dart';
 import '../login/login.dart';
 import '../main_home/home.dart';
 
@@ -42,15 +50,16 @@ class _RegisterState extends State<Register> {
         child: BlocConsumer<RegisterCubit, RegisterStates>(
           listener: (BuildContext context, Object? state) {
             if (state is RegisterCreateUserSuccessStates) {
-              cachHelper.saveData(key: 'uId', value: state.uId).then(
-                      (value) {
-                    Navigator.pushAndRemoveUntil(context,
+              cachHelper.saveData(key: 'uId', value: state.uId);
+
+              Navigator.pushAndRemoveUntil(context,
                         MaterialPageRoute(builder: (context) => Home()), (route) => false);
-                  }).catchError((error){
 
-                print(error.toString());
+              SocialCubit.get(context).getUserData();
 
-              });
+
+
+
             }
           },
           builder: (BuildContext context, state) {
@@ -207,16 +216,21 @@ class _RegisterState extends State<Register> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                   side: BorderSide(color: Colors.white24)),
-                              onPressed: () {
+                              onPressed: () async {
                                 if (formKey.currentState!.validate()) {
                                   RegisterCubit.get(context).userRegister(
                                     name: nameController.text,
                                     email: emailController.text,
                                     phone: phoneController.text,
                                     password: passwordController.text,
-
-
                                   );
+
+
+
+
+
+
+
                                 }
                               },
                               color: HexColor('#2888ff'),

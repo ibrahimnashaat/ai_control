@@ -1,3 +1,7 @@
+
+import 'package:ai_control/models/class_user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -36,4 +40,15 @@ Color chooseToastColor(ToastStates test){
 
   return color;
 }
+
+//
+// UserModel? model;
+// void firebaseAuth (){
+//   final uId = FirebaseAuth.instance.currentUser?.uid;
+//
+//   FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
+//     model = UserModel.fromJson(value.data()!);
+//   });
+//
+// }
 

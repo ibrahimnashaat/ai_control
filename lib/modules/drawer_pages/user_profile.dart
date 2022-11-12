@@ -1,8 +1,13 @@
 import 'package:ai_control/bloc/main_cubit/main_states.dart';
 import 'package:ai_control/bloc/main_cubit/mian_cubit.dart';
+import 'package:ai_control/models/class_user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../shared/constatnts/constants.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -16,14 +21,16 @@ class _UserProfileState extends State<UserProfile> {
   var bioController = TextEditingController();
   var phoneController = TextEditingController();
   var emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialStutes>(
       listener: (context, state) {},
       builder: (context, state) {
 
+        final model = SocialCubit.get(context).userModel;
 
-        var model = SocialCubit.get(context).userModel;
+
         var image = model?.image;
         var cover = model?.cover;
         nameController.text = model?.name??'loading..';

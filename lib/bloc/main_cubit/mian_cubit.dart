@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:ai_control/models/class_user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -26,21 +26,20 @@ class SocialCubit extends Cubit<SocialStutes> {
   UserModel? userModel;
 
 
-  void getUserData(
-
-      )
+  void getUserData()
  {
     emit(SocialGetUserLoadingStates());
-
-    // FirebaseFirestore.instance.collection("users").doc(uId).set(model.toMap(),).then((value)
-    FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
+    final uId = FirebaseAuth.instance.currentUser?.uid;
+     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
       userModel=UserModel.fromJson(value.data()!);
       print(userModel!.uId);
 
       emit(SocialGetUserSuccessStates());
     }).catchError((e){
-      emit(SocialGetUserErrorStates(e.toString()));
+      emit(SocialGetUserErrorStates());
     });
+
+
   }
 
 

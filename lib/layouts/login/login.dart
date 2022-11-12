@@ -1,5 +1,6 @@
 import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -7,6 +8,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../bloc/login_cubit/cubit.dart';
 import '../../bloc/login_cubit/states.dart';
+import '../../bloc/main_cubit/mian_cubit.dart';
 import '../../shared/components/components.dart';
 import '../main_home/home.dart';
 import '../register/register.dart';
@@ -18,6 +20,8 @@ class Login extends StatelessWidget {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +43,13 @@ class Login extends StatelessWidget {
 
               // cachHelper.saveData(key: 'token', value: false);
 
-            } else if (state is LoginSuccessStates ){
-              
+            } else if (state is LoginSuccessStates ) {
+
               cachHelper.saveData(key: 'uId', value: state.uId).then(
                       (value) {
                         Navigator.pushAndRemoveUntil(context,
                             MaterialPageRoute(builder: (context) => Home()), (route) => false);
+                        SocialCubit.get(context).getUserData();
                       }).catchError((error){
 
                         print(error.toString());
@@ -147,6 +152,7 @@ class Login extends StatelessWidget {
                                   LoginCubit.get(context).userLogin(
                                       email: emailController.text,
                                       password: passwordController.text);
+
                                 }
                               },
                               color: HexColor('#2888ff'),
@@ -217,5 +223,8 @@ class Login extends StatelessWidget {
         ),
       ),
     );
+
+
   }
+
 }

@@ -2,8 +2,11 @@ import 'package:ai_control/bloc/main_cubit/main_states.dart';
 import 'package:ai_control/bloc/main_cubit/mian_cubit.dart';
 import 'package:ai_control/bloc/register_cubit/cubit.dart';
 import 'package:ai_control/bloc/register_cubit/states.dart';
+import 'package:ai_control/models/class_user_model.dart';
 import 'package:ai_control/modules/drawer_pages/user_profile.dart';
 import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -11,17 +14,30 @@ import 'package:sizer/sizer.dart';
 
 import '../../modules/drawer_pages/about_us.dart';
 import '../../modules/drawer_pages/contact_us.dart';
+import '../../shared/constatnts/constants.dart';
 import '../login/login.dart';
 
-class Drawers extends StatelessWidget {
-  const Drawers({Key? key}) : super(key: key);
+class Drawers extends StatefulWidget {
+   Drawers({Key? key}) : super(key: key);
+
+  @override
+  State<Drawers> createState() => _DrawersState();
+}
+
+class _DrawersState extends State<Drawers> {
+
+
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit,SocialStutes>(
      listener: (context, state){},
      builder: (context,state){
-      var model = SocialCubit.get(context).userModel;
+
+
+
+      final model = SocialCubit.get(context).userModel;
+
       var image = model?.image;
       var cover = model?.cover;
       return Drawer(
@@ -174,14 +190,19 @@ class Drawers extends StatelessWidget {
              ),
              TextButton(
               onPressed: (){
-               cachHelper.removeData('uId').then((value) {
-                if (value ){
+               cachHelper.removeData('uId').then((value) async {
+
                  Navigator.pushAndRemoveUntil(
                      context,
-                     MaterialPageRoute(builder: (context)=>Login()), (route) => false
+                     MaterialPageRoute(builder: (context)=>Login()), (route) =>false
                  );
-                }
-               });
+
+
+
+               }
+               );
+
+               FirebaseAuth.instance.signOut();
               },
               child: Text(
                'logout',

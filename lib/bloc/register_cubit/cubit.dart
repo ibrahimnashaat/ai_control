@@ -61,10 +61,10 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String password,
 
 
-  }) {
+  }) async {
     emit(RegisterLoadingStates());
 
-    FirebaseAuth.instance.createUserWithEmailAndPassword(
+   await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,).then((value){
           print(value.user!.email);
