@@ -1,3 +1,4 @@
+import 'package:ai_control/bloc/main_cubit/mian_cubit.dart';
 import 'package:contactus/contactus.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -14,7 +15,18 @@ class _ContactUsState extends State<Contact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.brightness_4_outlined
+              ),
+          onPressed: (){
+                SocialCubit.get(context).changeSocialMode(formSared: false);
+
+          },)
+        ],
+      ),
       bottomNavigationBar: ContactUsBottomAppBar(
         companyName: 'Ibrahim Nashat',
         textColor: HexColor('#ff2e93'),

@@ -1,9 +1,12 @@
+import 'package:ai_control/app_localizations.dart';
+import 'package:ai_control/bloc/main_cubit/main_states.dart';
 import 'package:ai_control/shared/constatnts/constants.dart';
 import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'bloc/main_cubit/mian_cubit.dart';
 import 'layouts/login/login.dart';
@@ -13,10 +16,24 @@ import 'package:sizer/sizer.dart';
 
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  // Bloc.observer = MyBlocObserver();
+  // DioHelper.init();
+  // await cachHelper.init();
+  //
+  // isRtl = cachHelper.getData(key: 'isRtl') == null ? false : cachHelper.getData(key: 'isRtl');
+  // String translation = await rootBundle
+  //     .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
+
+
+
+
   await Firebase.initializeApp();
   await cachHelper.init();
-
+  /// dark & light
+  await cachHelper.init();
+  bool? isDark =cachHelper.getBoolean(key: 'isDark');
   Widget widget ;
 
    var onBoarding = cachHelper.getData(key: 'onBoarding');
@@ -48,7 +65,10 @@ void main() async {
   // }
 
   runApp( MyApp(
-      startWidget: widget
+    // isRtl : isRtl ,
+    // translation: translation,
+      startWidget: widget ,
+      isDark: false,
   ));
 }
 
@@ -56,9 +76,13 @@ class MyApp extends StatelessWidget {
 
   late final bool onBoarding;
   final Widget startWidget;
+  final bool isDark;
+  // final bool isRtl;
+  // final String translation;
 
-  MyApp({required this.startWidget});
 
+  // required this.isRtl , required this.translation
+  MyApp({required this.startWidget,required this.isDark ,});
 
   // This widget is the root of your application.
   @override
@@ -70,63 +94,221 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => SocialCubit()..getUserData(),
+
+
+        ),
+        /// dark & light
+        BlocProvider(
+        create: (BuildContext context)=> SocialCubit()..changeSocialMode(
+        formSared: isDark)),
+        BlocProvider(
+          create: (context) => LocaleCubit()..getSavedLanguage(),
         ),
 
+    //     ///translation
+    //     BlocProvider(
+    // create: (BuildContext context) => SocialCubit()
+    // ..setTranslation(translation: translation),
+
+
+
+
       ],
-      child: Sizer(
-          builder: (context, orientation, deviceType) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      /// dark & light
 
-                  selectedItemColor: HexColor('#2888ff'),
+        child: BlocBuilder<LocaleCubit, ChangeLocaleState>(
 
-                ),
-                appBarTheme: AppBarTheme(
+          builder:(context ,state ){
+            return Sizer(
+              builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
+                return BlocBuilder<SocialCubit,SocialStutes>(
+                  builder: (context,statemode)=>
+                   MaterialApp(
+                    locale: state.locale,
+                    supportedLocales: const [Locale('en'), Locale('ar')],
+                    localizationsDelegates: const [
+                      AppLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate
+                    ],
+                    localeResolutionCallback: (deviceLocale, supportedLocales) {
+                      for (var locale in supportedLocales) {
+                        if (deviceLocale != null &&
+                            deviceLocale.languageCode == locale.languageCode) {
+                          return deviceLocale;
+                        }
+                      }
 
-                  iconTheme: IconThemeData(
-                      color: HexColor('#2888ff'),
-                      size: 30
+                      return supportedLocales.first;
+                    },
+
+                    debugShowCheckedModeBanner: false,
+                    theme: ThemeData(
+                      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+
+                        selectedItemColor: HexColor('#2888ff'),
+
+                      ),
+                      textTheme: TextTheme(
+                        bodyText1: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.black,
+                        ),
+                        headline4:  TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+
+
+                      ),
+                      appBarTheme: AppBarTheme(
+
+                        iconTheme: IconThemeData(
+                            color: HexColor('#2888ff'),
+                            size: 30
+                        ),
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        elevation: 0.0,
+
+                        systemOverlayStyle: SystemUiOverlayStyle(
+                          statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+                          statusBarIconBrightness: Brightness.dark,
+
+                        ),
+
+
+
+                      ),
+
+                      inputDecorationTheme: InputDecorationTheme(
+                        filled: true,
+                        fillColor: Colors.grey[120],
+
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: HexColor('#2888ff'),),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color:HexColor('#2888ff'),),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: HexColor('#2888ff')),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+
+
+                      primarySwatch: Colors.blue,
+                    ),
+                    darkTheme: ThemeData(
+                      scaffoldBackgroundColor: Colors.black,
+                      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                          backgroundColor: Colors.black,
+                          elevation: 2.0,
+
+                          selectedItemColor: HexColor('#2888ff'),
+                          unselectedItemColor: Colors.grey
+
+                      ),
+                      appBarTheme: AppBarTheme(
+
+                        iconTheme: IconThemeData(
+                            color: HexColor('#2888ff'),
+                            size: 30
+                        ),
+                        color: Colors.black,
+                        elevation: 5.0,
+
+                        systemOverlayStyle: SystemUiOverlayStyle(
+                          statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+                          statusBarIconBrightness: Brightness.dark,
+
+                        ),
+
+
+
+                      ),
+                      drawerTheme:DrawerThemeData(
+                          backgroundColor: Colors.black
+                      ) ,
+                      textTheme: TextTheme(
+                        bodyText1: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white,
+                        ),
+                        headline4:  TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+
+                      ),
+
+                      inputDecorationTheme: InputDecorationTheme(
+                        filled: true,
+                        fillColor: Colors.grey[120],
+
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: HexColor('#2888ff'),),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color:HexColor('#2888ff'),),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: HexColor('#2888ff')),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+
+
+                      primarySwatch: Colors.blue,
+                    ),
+                    themeMode: SocialCubit.get(context).isDark ? ThemeMode.light:ThemeMode.dark,
+                    home: startWidget,
                   ),
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  elevation: 0.0,
+                );
+              },
 
-                  systemOverlayStyle: SystemUiOverlayStyle(
-                    statusBarColor: Theme.of(context).scaffoldBackgroundColor,
-                    statusBarIconBrightness: Brightness.dark,
-
-                  ),
-
-
-
-                ),
-
-                inputDecorationTheme: InputDecorationTheme(
-                  filled: true,
-                  fillColor: Colors.grey[120],
-
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: HexColor('#2888ff'),),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color:HexColor('#2888ff'),),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: HexColor('#2888ff')),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-
-
-                primarySwatch: Colors.blue,
-              ),
-              home: startWidget,
             );
-          }
-      ),
+          } ,
+        ),
+      ///translation2
+      // BlocBuilder<LocaleCubit, ChangeLocaleState>(
+      //   builder: (context, state) {
+      //     return MaterialApp(
+      //       locale: state.locale,
+      //       supportedLocales: const [Locale('en'), Locale('ar')],
+      //       localizationsDelegates: const [
+      //         AppLocalizations.delegate,
+      //         GlobalMaterialLocalizations.delegate,
+      //         GlobalWidgetsLocalizations.delegate,
+      //         GlobalCupertinoLocalizations.delegate
+      //       ],
+      //       localeResolutionCallback: (deviceLocale, supportedLocales) {
+      //         for (var locale in supportedLocales) {
+      //           if (deviceLocale != null &&
+      //               deviceLocale.languageCode == locale.languageCode) {
+      //             return deviceLocale;
+      //           }
+      //         }
+      //
+      //         return supportedLocales.first;
+      //       },
+      //       debugShowCheckedModeBanner: false,
+      //       home: const HomePage(),
+      //     );
+      //   },
+      // ),
+
+
+
     );
   }
 }

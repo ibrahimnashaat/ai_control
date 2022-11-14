@@ -30,3 +30,4 @@ class NeuroGetDownloadErrorState extends NeuroStates {
   NeuroGetDownloadErrorState (this.error);
 
 }
+

@@ -1,3 +1,4 @@
+import 'package:ai_control/app_localizations.dart';
 import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,9 @@ class Login extends StatelessWidget {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            label: Text('Enter Email'),
+                            label: Text(
+                                "Enter Email".tr(context)
+                            ),
                             prefixIcon: Icon(
                               Icons.mail_outline,
                             ),
@@ -113,7 +116,9 @@ class Login extends StatelessWidget {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              label: Text('passowrd'),
+                              label: Text(
+                                 "passowrd".tr(context)
+                              ),
                               prefixIcon: Icon(
                                 Icons.lock_outline,
                               ),
@@ -128,7 +133,8 @@ class Login extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                            children: [
-                             TextButton(onPressed: (){}, child: Text('Forget password?'))
+                             TextButton(onPressed: (){}, child: Text(
+                                 "Forget password?".tr(context)))
                            ],
 
                         ),
@@ -153,7 +159,9 @@ class Login extends StatelessWidget {
                               textColor:
                                   Theme.of(context).scaffoldBackgroundColor,
                               child:
-                                  Text("LOGIN", style: TextStyle(fontSize: 28)),
+                                  Text(
+                                      "LOGIN".tr(context)
+                                      , style: TextStyle(fontSize: 28)),
                             ),
                           ),
                           fallback: (BuildContext context) =>
@@ -163,7 +171,9 @@ class Login extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('don\'t have an account?',
+                            Text(
+                             "don\\'t have an account?".tr(context)
+                              ,
                             style: TextStyle(
                               color: Colors.black54
                             ),),
@@ -171,7 +181,9 @@ class Login extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Register()), (route) => false);
 
-                                }, child: Text('REGISTER'))
+                                }, child: Text(
+                                "REGISTER".tr(context)
+                            ))
                           ],
                         ),
                         SizedBox(

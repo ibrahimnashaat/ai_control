@@ -1,3 +1,4 @@
+import 'package:ai_control/app_localizations.dart';
 import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -90,7 +91,10 @@ class _RegisterState extends State<Register> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            label: Text('Enter name'),
+                            label: Text(
+                                "Enter name".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1
+                            ),
                             prefixIcon: Icon(
                               Icons.person,
                             ),
@@ -111,7 +115,9 @@ class _RegisterState extends State<Register> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            label: Text('Enter e-mail'),
+                            label: Text(
+                                "Enter e-mail".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1),
                             prefixIcon: Icon(
                               Icons.mail,
                             ),
@@ -132,7 +138,11 @@ class _RegisterState extends State<Register> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            label: Text('Enter Number'),
+                            label: Text(
+                               "Enter Number".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1),
+
+
                             prefixIcon: Icon(
                               Icons.phone,
                             ),
@@ -154,7 +164,10 @@ class _RegisterState extends State<Register> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              label: Text('passowrd'),
+                              label: Text(
+                                  "passowrd".tr(context),
+                                  style: Theme.of(context).textTheme.bodyText1),
+
                               prefixIcon: Icon(
                                 Icons.lock,
                               ),
@@ -222,8 +235,10 @@ class _RegisterState extends State<Register> {
                               color: HexColor('#2888ff'),
                               textColor:
                                   Theme.of(context).scaffoldBackgroundColor,
-                              child: Text("REGISTER",
-                                  style: TextStyle(fontSize: 22)),
+                              child: Text(
+                                  "REGISTER".tr(context),
+                                  style: Theme.of(context).textTheme.bodyText1),
+
                             ),
                           ),
                           fallback: (BuildContext context) =>
@@ -236,9 +251,9 @@ class _RegisterState extends State<Register> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'have an account?',
-                              style: TextStyle(color: Colors.black54),
-                            ),
+                             "have an account?".tr(context),
+                            style: Theme.of(context).textTheme.bodyText1),
+
                             TextButton(
                                 onPressed: () {
                                   Navigator.pushAndRemoveUntil(
@@ -247,7 +262,10 @@ class _RegisterState extends State<Register> {
                                           builder: (context) => Login()),
                                       (route) => false);
                                 },
-                                child: Text('LOGIN'))
+                                child: Text(
+                                   "LOGIN".tr(context),
+                                    style: Theme.of(context).textTheme.bodyText1),
+                                )
                           ],
                         ),
                       ],

@@ -9,6 +9,8 @@ import 'dart:math' as math;
 
 import 'package:firebase_database/firebase_database.dart';
 
+import '../../app_localizations.dart';
+
 class Patient extends StatefulWidget {
   const Patient({Key? key}) : super(key: key);
 
@@ -55,12 +57,8 @@ class _PatientState extends State<Patient> {
                           child: Expanded(
                             flex: 1,
                             child: Text(
-                              'Good Morning!',
-                              style: TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).scaffoldBackgroundColor,
-                              ),
+                              "Good Morning!".tr(context),
+                              style: Theme.of(context).textTheme.headline4,
                             ),
                           ),
                         ),
@@ -73,12 +71,8 @@ class _PatientState extends State<Patient> {
                         child: Container(
                           margin: EdgeInsets.only(left: 24, right: 4, bottom: 10),
                           child: Text(
-                            'please connect the ECG device before you click on the start button!',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w300,
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                            ),
+                              "please connect the ECG device before you click on the start button!".tr(context),
+                            style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
                       ),
@@ -123,7 +117,9 @@ class _PatientState extends State<Patient> {
                     },
                     color: HexColor('#2888ff'),
                     textColor: Theme.of(context).scaffoldBackgroundColor,
-                    child: Text("start", style: TextStyle(fontSize: 28)),
+                    child: Text(
+                        "start".tr(context)
+                        , style: Theme.of(context).textTheme.headline4),
                   ),
                   Text(
                     '|',
@@ -144,7 +140,9 @@ class _PatientState extends State<Patient> {
                     },
                     color: Colors.red,
                     textColor: Theme.of(context).scaffoldBackgroundColor,
-                    child: Text("stop", style: TextStyle(fontSize: 28)),
+                    child: Text(
+                        "stop".tr(context)
+                        , style: Theme.of(context).textTheme.headline4),
                   ),
                 ],
               ),

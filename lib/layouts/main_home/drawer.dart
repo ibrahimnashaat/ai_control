@@ -1,3 +1,4 @@
+import 'package:ai_control/app_localizations.dart';
 import 'package:ai_control/bloc/main_cubit/main_states.dart';
 import 'package:ai_control/bloc/main_cubit/mian_cubit.dart';
 import 'package:ai_control/bloc/register_cubit/cubit.dart';
@@ -102,7 +103,7 @@ class Drawers extends StatelessWidget {
                }));
               },
               child:  Text(
-               'profile',
+               "profile".tr(context),
                style: TextStyle(
                 fontSize: 20,
                 color: HexColor('#2888ff'),
@@ -127,7 +128,7 @@ class Drawers extends StatelessWidget {
                );
               },
               child:  Text(
-               'about us',
+               "about us".tr(context),
                style: TextStyle(
                 fontSize: 20,
                 color: HexColor('#2888ff'),
@@ -152,7 +153,7 @@ class Drawers extends StatelessWidget {
                );
               },
               child:  Text(
-               'contact us',
+               "contact us".tr(context),
                style: TextStyle(
                 fontSize: 20,
                 color: HexColor('#2888ff'),
@@ -184,7 +185,7 @@ class Drawers extends StatelessWidget {
                });
               },
               child: Text(
-               'logout',
+               "logout".tr(context),
                style: TextStyle(
                 fontSize: 20,
                 color: HexColor('#2888ff'),

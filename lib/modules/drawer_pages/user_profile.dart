@@ -1,3 +1,4 @@
+import 'package:ai_control/app_localizations.dart';
 import 'package:ai_control/bloc/main_cubit/main_states.dart';
 import 'package:ai_control/bloc/main_cubit/mian_cubit.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class _UserProfileState extends State<UserProfile> {
 
         return Scaffold(
           appBar: AppBar(
+
             leading: IconButton(icon:Icon(Icons.arrow_back_ios_rounded),onPressed: (){
               Navigator.pop(context);
             },),
@@ -55,7 +57,7 @@ class _UserProfileState extends State<UserProfile> {
                 },
                 child: SizedBox(
                   child: Text(
-                    'Update',
+                    "Update".tr(context),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20.sp,
@@ -156,17 +158,11 @@ class _UserProfileState extends State<UserProfile> {
 
                   Text(
                     '${model?.name??'loading..'}',
-                  style: TextStyle(
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.bold
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1,
                   ),
                   Text(
                     '${model?.bio??'loading..'}',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w300
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1,
                   ),
                   SizedBox(
                     height: 6.h,
@@ -189,10 +185,9 @@ class _UserProfileState extends State<UserProfile> {
                                            email: emailController.text,
                                            bio: bioController.text);
                                      },
-                                     child: Text('Update Cover',
-                                     style: TextStyle(
-                                       fontSize: 18.sp
-                                     ),
+                                     child: Text(
+                                       "Update Cover".tr(context),
+                                     style: Theme.of(context).textTheme.bodyText1,
                                      ),
                                    style: OutlinedButton.styleFrom(
 
@@ -228,10 +223,9 @@ class _UserProfileState extends State<UserProfile> {
                                          email: emailController.text,
                                          bio: bioController.text);
                                    },
-                                   child: Text('Update Image',
-                                   style: TextStyle(
-                                     fontSize: 18.sp
-                                   ),
+                                   child: Text(
+                                    "Update Image".tr(context),
+                                   style: Theme.of(context).textTheme.bodyText1,
                                    ),
                                  style: OutlinedButton.styleFrom(
                                    minimumSize: Size(100, 50),
@@ -268,8 +262,11 @@ class _UserProfileState extends State<UserProfile> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      label: Text('User Name'),
+                      label: Text(
+                        "User Name".tr(context),
+                      style: Theme.of(context).textTheme.bodyText1,),
                       prefixIcon: Icon(
+
                         Icons.person,
                       ),
                     ),
@@ -290,7 +287,9 @@ class _UserProfileState extends State<UserProfile> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      label: Text('BIO'),
+                      label: Text(
+                        "BIO".tr(context),
+                      style: Theme.of(context).textTheme.bodyText1,),
                       prefixIcon: Icon(
                         Icons.info_outline,
                       ),
@@ -312,7 +311,9 @@ class _UserProfileState extends State<UserProfile> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      label: Text('phone'),
+                      label: Text(
+                        "phone".tr(context),
+                      style: Theme.of(context).textTheme.bodyText1,),
                       prefixIcon: Icon(
                         Icons.phone,
                       ),
@@ -334,7 +335,9 @@ class _UserProfileState extends State<UserProfile> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      label: Text('e-mail'),
+                      label: Text(
+                        "e-mail".tr(context),
+                      style: Theme.of(context).textTheme.bodyText1,),
                       prefixIcon: Icon(
                         Icons.email_outlined,
                       ),

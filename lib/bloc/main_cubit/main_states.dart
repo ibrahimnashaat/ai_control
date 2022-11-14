@@ -1,4 +1,7 @@
-abstract class SocialStutes{}
+import 'package:flutter/material.dart';
+
+abstract class SocialStutes{
+}
 class SocialInitiallStates extends SocialStutes{}
 class SocialGetUserLoadingStates extends SocialStutes{}
 class SocialGetUserSuccessStates extends SocialStutes{}
@@ -76,4 +79,12 @@ class SocialGetMessageErrorStates extends SocialStutes
 {
   final String error;
   SocialGetMessageErrorStates(this.error);
+}
+class SocialChangeModeState extends SocialStutes{}
+///translation2
+class ChangeLocaleState extends SocialStutes{
+  final Locale locale;
+  ChangeLocaleState({
+    required this.locale,
+  });
 }

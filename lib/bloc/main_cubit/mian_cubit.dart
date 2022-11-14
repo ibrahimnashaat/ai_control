@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ai_control/models/class_user_model.dart';
+import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
@@ -17,43 +18,41 @@ import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
 
 class SocialCubit extends Cubit<SocialStutes> {
   SocialCubit() : super(SocialInitiallStates());
+  ///translation2
+
+
   static SocialCubit get(context) => BlocProvider.of(context);
   int CurrentIndex = 0;
-
-
 
 
   UserModel? userModel;
 
 
-  void getUserData(
-
-      )
- {
+  void getUserData() {
     emit(SocialGetUserLoadingStates());
 
     // FirebaseFirestore.instance.collection("users").doc(uId).set(model.toMap(),).then((value)
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
-      userModel=UserModel.fromJson(value.data()!);
+      userModel = UserModel.fromJson(value.data()!);
       print(userModel!.uId);
 
       emit(SocialGetUserSuccessStates());
-    }).catchError((e){
+    }).catchError((e) {
       emit(SocialGetUserErrorStates(e.toString()));
     });
   }
 
 
-
   File? ProfileImage;
-  var picker =ImagePicker();
+  var picker = ImagePicker();
+
   Future<void> getProfileImage() async {
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
       ProfileImage = File(pickedFile.path);
-      emit( SocialProfileImagePeckerSuccessStates ());
+      emit(SocialProfileImagePeckerSuccessStates());
     } else {
       print('No Image Selected!');
       emit(SocialProfileImagePeckerErrorStates());
@@ -61,16 +60,15 @@ class SocialCubit extends Cubit<SocialStutes> {
   }
 
 
-
-
   File? CoverImage;
+
   Future<void> getCoverImage() async {
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
       CoverImage = File(pickedFile.path);
-      emit( SocialProfileCoverPeckerSuccessStates ());
+      emit(SocialProfileCoverPeckerSuccessStates());
     } else {
       print('No Image Selected!');
       emit(SocialProfileCoverPeckerErrorStates());
@@ -78,17 +76,18 @@ class SocialCubit extends Cubit<SocialStutes> {
   }
 
 
-
   void upLoudProfilImage({
     required String name,
     required String phone,
     required String email,
     required String bio,
-  })
-  {
+  }) {
     emit(SocialUserUpdateLoadingStates());
-    firebase_storage.FirebaseStorage.instance.ref().child("users/${Uri.file(ProfileImage!.path).
-    pathSegments.last}").putFile(ProfileImage!).then((value) {
+    firebase_storage.FirebaseStorage.instance.ref().child("users/${Uri
+        .file(ProfileImage!.path)
+        .
+    pathSegments
+        .last}").putFile(ProfileImage!).then((value) {
       value.ref.getDownloadURL().then((value) {
         updateUser(
           bio: bio,
@@ -99,16 +98,13 @@ class SocialCubit extends Cubit<SocialStutes> {
         );
 
         //emit(SocialUpLoudProfileImageSuccessStates());
-      }).catchError((e)
-      {
+      }).catchError((e) {
         emit(SocialUpLoudProfileImageErrorStates());
       });
-    }).catchError((e){
-
+    }).catchError((e) {
       emit(SocialUpLoudProfileImageErrorStates());
     });
   }
-
 
 
   void upLoudProfilCover({
@@ -117,12 +113,14 @@ class SocialCubit extends Cubit<SocialStutes> {
     required String email,
     required String bio,
 
-  })
-  {
-    emit( SocialUserUpdateLoadingStates());
+  }) {
+    emit(SocialUserUpdateLoadingStates());
     firebase_storage.FirebaseStorage.instance.ref().
-    child("users/${Uri.file(CoverImage!.path).
-    pathSegments.last}").putFile(CoverImage!).then((value) {
+    child("users/${Uri
+        .file(CoverImage!.path)
+        .
+    pathSegments
+        .last}").putFile(CoverImage!).then((value) {
       value.ref.getDownloadURL().then((value) {
         updateUser(
           bio: bio,
@@ -133,11 +131,10 @@ class SocialCubit extends Cubit<SocialStutes> {
         );
 
         //emit(SocialUpLoudProfileCoverSuccessStates());
-      }).catchError((e)
-      {
+      }).catchError((e) {
         emit(SocialUpLoudProfileCoverErrorStates());
       });
-    }).catchError((e){
+    }).catchError((e) {
       emit(SocialUpLoudProfileCoverErrorStates());
     });
   }
@@ -173,35 +170,88 @@ class SocialCubit extends Cubit<SocialStutes> {
   }*/
 
 
-  void updateUser(
-      { required String name,
-        required String phone,
-        required String email,
-        required String bio,
-        String? image,
-        String? cover,})
-  {
+  void updateUser({ required String name,
+    required String phone,
+    required String email,
+    required String bio,
+    String? image,
+    String? cover,}) {
     UserModel model = UserModel(
       phone: phone,
       name: name,
       bio: bio,
       email: email,
       cover: cover ?? userModel?.cover,
-      image: image?? userModel?.image,
+      image: image ?? userModel?.image,
       uId: userModel?.uId,
       isEmailVerified: false,
 
     );
-    FirebaseFirestore.instance.collection("users").doc(userModel!.uId).update(model.toMap())
-        .then((value)
-    {
+    FirebaseFirestore.instance.collection("users").doc(userModel!.uId).update(
+        model.toMap())
+        .then((value) {
       getUserData();
-
-    }).catchError((e)
-    {
+    }).catchError((e) {
       emit(SocialUserUpdateErrorStates());
     });
   }
 
+  ///dark & light
+  bool isDark = false;
+
+  void changeSocialMode({required bool formSared}) {
+    if (formSared != false) {
+      isDark = formSared;
+      emit(SocialChangeModeState());
+    }
+    else {
+      isDark = !isDark;
+      cachHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
+        emit(SocialChangeModeState());
+      });
+    }
+  }
+
+///translation
+// void changeLanguage() async {
+//   isRtl = !isRtl;
+//
+//   CacheHelper.saveData(key: 'isRtl' , value: isRtl);
+//   String translation = await rootBundle
+//       .loadString('assets/translations/${isRtl ? 'ar' : 'en'}.json');
+//   setTranslation(
+//     translation: translation,
+//   );
+//
+//   emit(ChangeLanguageState());
+// }
+//
+// late TranslationModel translationModel;
+//
+// void setTranslation({
+//   required String translation,
+// }) {
+//   translationModel = TranslationModel.fromJson(json.decode(
+//     translation,
+//   ));
+//   emit(LanguageLoaded());
+// }
+
 
 }
+class LocaleCubit extends Cubit<ChangeLocaleState> {
+  LocaleCubit() : super(ChangeLocaleState(locale: const Locale('en')));
+
+  Future<void> getSavedLanguage() async {
+    final String cachedLanguageCode =
+    await LanguageCacheHelper().getCachedLanguageCode();
+
+    emit(ChangeLocaleState(locale: Locale(cachedLanguageCode)));
+  }
+
+  Future<void> changeLanguage(String languageCode) async {
+    await LanguageCacheHelper().cacheLanguageCode(languageCode);
+    emit(ChangeLocaleState(locale: Locale(languageCode)));
+  }
+}
+

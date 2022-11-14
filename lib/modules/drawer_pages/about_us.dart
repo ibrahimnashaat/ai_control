@@ -1,3 +1,4 @@
+import 'package:ai_control/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -13,6 +14,7 @@ class _AboutUsState extends State<AboutUs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
 
       ),
       body: SingleChildScrollView(
@@ -44,25 +46,17 @@ class _AboutUsState extends State<AboutUs> {
                         top: 10
 
                       ),
-                      child: Text('About Us',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).scaffoldBackgroundColor,
-
-                      ),
+                      child: Text(
+                        "About Us".tr(context),
+                      style: Theme.of(context).textTheme.headline4,
                       ),
                     ),
 
                     Container(
                       margin: EdgeInsets.all(20.0),
                       child: Text(
-                          'The designers of this application are members of the NeuroAi team who specialize in the manufacture of software and embedded systems and the integration of artificial intelligence in them.'
-                          '\nThe NeuroAi team, is a full-fledged team that pursues customer satisfaction and strives to help patients.',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                      ),
+                      "definition".tr(context),
+                      style: Theme.of(context).textTheme.bodyText1,
 
                       ),
                     ),
@@ -101,7 +95,7 @@ class _AboutUsState extends State<AboutUs> {
                         height: 16,
                       ),
                       Text(
-                          'D\\ Amr Abdellatif',
+                        "D\\\\ Amr Abdellatif".tr(context),
                       style: TextStyle(
                         fontSize: 20,
                         color: HexColor('#2888ff'),
@@ -122,7 +116,7 @@ class _AboutUsState extends State<AboutUs> {
                         height: 16,
                       ),
                       Text(
-                        'Ibrahim Elsadat',
+                        "Ibrahim Elsadat".tr(context),
                         style: TextStyle(
                             color: HexColor('#2888ff'),
                             fontSize: 20
@@ -150,7 +144,7 @@ class _AboutUsState extends State<AboutUs> {
                         height: 16,
                       ),
                       Text(
-                        'Ahmed Mohamed',
+                        "Ahmed Mohamed".tr(context),
                         style: TextStyle(
                             color: HexColor('#2888ff'),
                             fontSize: 20
@@ -171,7 +165,7 @@ class _AboutUsState extends State<AboutUs> {
                         height: 16,
                       ),
                       Text(
-                        'Apanop Fekry',
+                        "Apanop Fekry".tr(context),
                         style: TextStyle(
                             color: HexColor('#2888ff'),
                             fontSize: 20
@@ -197,7 +191,7 @@ class _AboutUsState extends State<AboutUs> {
                         height: 16,
                       ),
                       Text(
-                        'Ibthal Ahmed',
+                        "Ibthal Ahmed".tr(context),
                         style: TextStyle(
                             color: HexColor('#2888ff'),
                             fontSize: 20
@@ -218,7 +212,7 @@ class _AboutUsState extends State<AboutUs> {
                         height: 16,
                       ),
                       Text(
-                        'Heba Ahmed',
+                       "Heba Ahmed".tr(context),
                         style: TextStyle(
                             color: HexColor('#2888ff'),
                             fontSize: 20
@@ -245,7 +239,7 @@ class _AboutUsState extends State<AboutUs> {
                         height: 16,
                       ),
                       Text(
-                        'Ibrahim Nashat',
+                        "Ibrahim Nashat".tr(context),
                         style: TextStyle(
                           fontSize: 20,
                           color: HexColor('#2888ff'),

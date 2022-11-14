@@ -1,3 +1,4 @@
+import 'package:ai_control/app_localizations.dart';
 import 'package:ai_control/models/pdf_model/customer.dart';
 import 'package:ai_control/models/pdf_model/invoice.dart';
 import 'package:ai_control/models/pdf_model/supplier.dart';
@@ -52,12 +53,8 @@ class _DownloadState extends State<Download> {
                           Container(
                             margin: EdgeInsets.only(left: 6, top: 10),
                             child: Text(
-                              'Patient Informations!',
-                              style: TextStyle(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context)
-                                      .scaffoldBackgroundColor),
+                              "Patient Informations!".tr(context),
+                              style: Theme.of(context).textTheme.headline4
                             ),
                           ),
                           SizedBox(
@@ -67,12 +64,8 @@ class _DownloadState extends State<Download> {
                             margin:
                                 EdgeInsets.only(left: 6, right: 4, bottom: 10),
                             child: Text(
-                              'please connect the ECG device before you click on the start button!',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300,
-                                  color: Theme.of(context)
-                                      .scaffoldBackgroundColor),
+                              "please connect the ECG device before you click on the start button!".tr(context),
+                              style: Theme.of(context).textTheme.bodyText1,
                             ),
                           ),
                         ],
@@ -91,15 +84,12 @@ class _DownloadState extends State<Download> {
                           child: Row(
                             children: [
                               Text(
-                                'Patient Name : ',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blueGrey),
+                                "Patient Name : ".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
                               Expanded(
                                 child: Text(
-                                  model?.name ?? 'loading..',
+                                  model?.name ?? "loading..".tr(context),
                                   style: TextStyle(color: Colors.blueGrey),
                                 ),
                               ),
@@ -110,15 +100,12 @@ class _DownloadState extends State<Download> {
                           child: Row(
                             children: [
                               Text(
-                                'Patient age : ',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blueGrey),
+                                "Patient age : ".tr(context),
+                                style:  Theme.of(context).textTheme.bodyText1,
                               ),
                               Text(
                                 '21',
-                                style: TextStyle(color: Colors.blueGrey),
+                                style:  TextStyle(color: Colors.blueGrey),
                               ),
                             ],
                           ),
@@ -127,15 +114,12 @@ class _DownloadState extends State<Download> {
                           child: Row(
                             children: [
                               Text(
-                                'Patient gender : ',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blueGrey),
+                                "Patient gender : ".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
                               Text(
-                                'Male',
-                                style: TextStyle(color: Colors.blueGrey),
+                                "Male".tr(context),
+                                style:  TextStyle(color: Colors.blueGrey),
                               ),
                             ],
                           ),
@@ -144,16 +128,13 @@ class _DownloadState extends State<Download> {
                           child: Row(
                             children: [
                               Text(
-                                'Patient phone number : ',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blueGrey),
+                                "Patient phone number : ".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1
                               ),
                               Expanded(
                                 child: Text(
-                                  model?.phone ?? 'loading..',
-                                  style: TextStyle(color: Colors.blueGrey),
+                                  model?.phone ?? 'loading..'.tr(context),
+                                  style:  TextStyle(color: Colors.blueGrey),
                                 ),
                               ),
                             ],
@@ -163,15 +144,12 @@ class _DownloadState extends State<Download> {
                           child: Row(
                             children: [
                               Text(
-                                'Patient location : ',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blueGrey),
+                                "Patient location : ".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
                               Expanded(
                                 child: Text(
-                                  'Abu Hammad, Asharqia, Egypt',
+                                  "Abu Hammad, Asharqia, Egypt".tr(context),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(color: Colors.blueGrey),
@@ -184,15 +162,12 @@ class _DownloadState extends State<Download> {
                           child: Row(
                             children: [
                               Text(
-                                'Patient state : ',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blueGrey),
+                                "Patient state : ".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
                               Text(
-                                'Negative',
-                                style: TextStyle(color: Colors.blueGrey),
+                               "Negative".tr(context),
+                                style:  TextStyle(color: Colors.blueGrey),
                               ),
                             ],
                           ),
@@ -218,55 +193,55 @@ class _DownloadState extends State<Download> {
 
                           final invoice = Invoice(
                             supplier: Supplier(
-                              name: 'Zagazig University',
-                              address: 'The university supervising the project',
+                              name: "Zagazig University".tr(context),
+                              address: "The university supervising the project".tr(context),
                               paymentInfo: 'ai.control@gmail.com',
                             ),
                             customer: Customer(
-                              name: 'DR/ Amr abdellatife',
-                              address: 'The doctor supervising the project',
+                              name: "DR/ Amr abdellatife".tr(context),
+                              address: "The doctor supervising the project".tr(context),
                             ),
                             info: InvoiceInfo(
                               date: date,
                               dueDate: dueDate,
-                              description: 'our beautiful team',
+                              description: "our beautiful team".tr(context),
                               number: '${DateTime.now().year}-9999',
                             ),
                             items: [
                               InvoiceItem(
-                                description: 'Patient Name',
+                                description: "Patient Name".tr(context),
                                 date: DateTime.now(),
-                                information:model?.name ?? 'loading..',
+                                information:model?.name ??"loading..".tr(context),
 
                               ),
                               InvoiceItem(
-                                description: 'Patient Age',
+                                description: "Patient Age".tr(context),
                                 date: DateTime.now(),
                                 information:  '21',
 
                               ),
                               InvoiceItem(
-                                description: 'Patient Gender',
+                                description: "Patient Gender".tr(context),
                                 date: DateTime.now(),
-                                information:'Male' ,
+                                information:"Male".tr(context) ,
 
                               ),
                               InvoiceItem(
-                                description: 'Patient Phone Number',
+                                description: "Patient Phone Number".tr(context),
                                 date: DateTime.now(),
-                                information:  model?.phone ?? 'loading..',
+                                information:  model?.phone ?? "loading..".tr(context),
 
 
                               ),
                               InvoiceItem(
-                                description: 'Patient Location',
+                                description: "Patient Location".tr(context),
                                 date: DateTime.now(),
-                                information: 'Abu Hammad, Asharqia,Egypt',
+                                information: "Abu Hammad, Asharqia,Egypt".tr(context),
                               ),
                               InvoiceItem(
-                                description: 'Patient State',
+                                description: "Patient State".tr(context),
                                 date: DateTime.now(),
-                               information: 'Negative'
+                               information: "Negative".tr(context)
                               ),
 
                             ],
@@ -285,8 +260,8 @@ class _DownloadState extends State<Download> {
                               width: 10,
                             ),
                             Text(
-                              "Download",
-                              style: TextStyle(fontSize: 28),
+                              "Download".tr(context),
+                              style: Theme.of(context).textTheme.headline4,
                               textAlign: TextAlign.center,
                             ),
                           ],
