@@ -24,7 +24,7 @@ class _AboutUsState extends State<AboutUs> {
               right: 20
           ),
           child: Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
 
@@ -42,21 +42,21 @@ class _AboutUsState extends State<AboutUs> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(
-                        left: 20,
-                        top: 10
+                          left: 20,
+                          top: 10
 
                       ),
                       child: Text(
                         "About Us".tr(context),
-                      style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headline4,
                       ),
                     ),
 
                     Container(
                       margin: EdgeInsets.all(20.0),
                       child: Text(
-                      "definition".tr(context),
-                      style: Theme.of(context).textTheme.bodyText1,
+                        "definition".tr(context),
+                        style: Theme.of(context).textTheme.bodyText1,
 
                       ),
                     ),
@@ -96,10 +96,10 @@ class _AboutUsState extends State<AboutUs> {
                       ),
                       Text(
                         "D\\\\ Amr Abdellatif".tr(context),
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: HexColor('#2888ff'),
-                      ),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: HexColor('#2888ff'),
+                        ),
                       ),
                     ],
                   ),
@@ -212,7 +212,7 @@ class _AboutUsState extends State<AboutUs> {
                         height: 16,
                       ),
                       Text(
-                       "Heba Ahmed".tr(context),
+                        "Heba Ahmed".tr(context),
                         style: TextStyle(
                             color: HexColor('#2888ff'),
                             fontSize: 20

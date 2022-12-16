@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 
+import '../../bloc/main_cubit/mian_cubit.dart';
 import '../../bloc/register_cubit/cubit.dart';
 import '../../bloc/register_cubit/states.dart';
 import '../login/login.dart';
@@ -43,16 +44,28 @@ class _RegisterState extends State<Register> {
         child: BlocConsumer<RegisterCubit, RegisterStates>(
           listener: (BuildContext context, Object? state) {
             if (state is RegisterCreateUserSuccessStates) {
-              cachHelper.saveData(key: 'uId', value: state.uId).then(
-                      (value) {
-                    Navigator.pushAndRemoveUntil(context,
-                        MaterialPageRoute(builder: (context) => Home()), (route) => false);
-                  }).catchError((error){
+              cachHelper.saveData(key: 'uId', value: state.uId);
 
-                print(error.toString());
+              Navigator.pushAndRemoveUntil(context,
+                  MaterialPageRoute(builder: (context) => Home()), (route) => false);
 
-              });
+              SocialCubit.get(context).getUserData();
+
+
+
+
             }
+            // if (state is RegisterCreateUserSuccessStates) {
+            //   cachHelper.saveData(key: 'uId', value: state.uId).then(
+            //           (value) {
+            //         Navigator.pushAndRemoveUntil(context,
+            //             MaterialPageRoute(builder: (context) => Home()), (route) => false);
+            //       }).catchError((error){
+            //
+            //     print(error.toString());
+            //
+            //   });
+            // }
           },
           builder: (BuildContext context, state) {
             return Padding(
@@ -139,7 +152,7 @@ class _RegisterState extends State<Register> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             label: Text(
-                               "Enter Number".tr(context),
+                                "Enter Number".tr(context),
                                 style: Theme.of(context).textTheme.bodyText1),
 
 
@@ -234,7 +247,7 @@ class _RegisterState extends State<Register> {
                               },
                               color: HexColor('#2888ff'),
                               textColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
+                              Theme.of(context).scaffoldBackgroundColor,
                               child: Text(
                                   "REGISTER".tr(context),
                                   style: Theme.of(context).textTheme.bodyText1),
@@ -251,21 +264,21 @@ class _RegisterState extends State<Register> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                             "have an account?".tr(context),
-                            style: Theme.of(context).textTheme.bodyText1),
+                                "have an account?".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1),
 
                             TextButton(
-                                onPressed: () {
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Login()),
-                                      (route) => false);
-                                },
-                                child: Text(
-                                   "LOGIN".tr(context),
-                                    style: Theme.of(context).textTheme.bodyText1),
-                                )
+                              onPressed: () {
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Login()),
+                                        (route) => false);
+                              },
+                              child: Text(
+                                  "LOGIN".tr(context),
+                                  style: Theme.of(context).textTheme.bodyText1),
+                            )
                           ],
                         ),
                       ],

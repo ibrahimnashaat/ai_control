@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:ai_control/models/class_user_model.dart';
 import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../shared/constatnts/constants.dart';
+//import '../../shared/constatnts/constants.dart';
 import 'main_states.dart';
 
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
@@ -30,6 +31,7 @@ class SocialCubit extends Cubit<SocialStutes> {
 
   void getUserData() {
     emit(SocialGetUserLoadingStates());
+    final uId = FirebaseAuth.instance.currentUser?.uid;
 
     // FirebaseFirestore.instance.collection("users").doc(uId).set(model.toMap(),).then((value)
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {

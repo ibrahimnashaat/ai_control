@@ -27,17 +27,17 @@ class _OnBoardingState extends State<OnBoarding> {
         image: 'assets/images/13.png',
         text1: 'Disease Detection',
         text2:
-            'This application helps you in early detection of diseases that may cause great harm in the future without your knowledge.'),
+        'This application helps you in early detection of diseases that may cause great harm in the future without your knowledge.'),
     Swiping(
         image: 'assets/images/14.png',
         text1: 'Health Status',
         text2:
-            'The application allows you to follow up on your condition periodically, and see if there is an improvement or not.'),
+        'The application allows you to follow up on your condition periodically, and see if there is an improvement or not.'),
     Swiping(
         image: 'assets/images/20.png',
         text1: 'Doctor\'s Instructions',
         text2:
-            'The application allows you to download your medical information, and send it to the doctor to be examined for you.'),
+        'The application allows you to download your medical information, and send it to the doctor to be examined for you.'),
   ];
 
   var pageController = PageController();
@@ -62,9 +62,9 @@ class _OnBoardingState extends State<OnBoarding> {
             child: TextButton(onPressed: submit,
               child:  Text('SKIP',style: TextStyle(
                   color: HexColor('#2888ff'),
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 2
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 2
               ),),),
           ),
 
@@ -72,7 +72,7 @@ class _OnBoardingState extends State<OnBoarding> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(
-        left: 20.0,
+          left: 20.0,
           right: 20.0,
           bottom: 20.0,
         ),
@@ -162,36 +162,36 @@ class _OnBoardingState extends State<OnBoarding> {
   }
 
   Widget onBoarding(Swiping wid) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
 
-          Image.asset(
-            '${wid.image}',
+      Image.asset(
+        '${wid.image}',
 
+      ),
+      Text(
+        '${wid.text1}',
+        style: TextStyle(
+            fontSize: 24.sp,
+            fontWeight: FontWeight.bold,
+            color: HexColor('#1D2445'),
+            letterSpacing: 2),
+      ),
+      SizedBox(
+        height: 4.h,
+      ),
+      SizedBox(
+        width: 80.w,
+        child: Text(
+          '${wid.text2}',
+          //      'I have developed meaningful relationships with individuals of all ages, including seven-year-old Hillary. Many of my mentees come from disadvantaged backgrounds',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.black54,
           ),
-          Text(
-            '${wid.text1}',
-            style: TextStyle(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.bold,
-                color: HexColor('#1D2445'),
-                letterSpacing: 2),
-          ),
-          SizedBox(
-            height: 4.h,
-          ),
-          SizedBox(
-            width: 80.w,
-            child: Text(
-              '${wid.text2}',
-              //      'I have developed meaningful relationships with individuals of all ages, including seven-year-old Hillary. Many of my mentees come from disadvantaged backgrounds',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black54,
-              ),
-            ),
-          ),
+        ),
+      ),
 
-        ],
-      );
+    ],
+  );
 }

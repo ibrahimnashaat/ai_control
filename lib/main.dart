@@ -36,18 +36,18 @@ void main() async {
   bool? isDark =cachHelper.getBoolean(key: 'isDark');
   Widget widget ;
 
-   var onBoarding = cachHelper.getData(key: 'onBoarding');
-   //var token = cachHelper.getData(key: 'token');
+  var onBoarding = cachHelper.getData(key: 'onBoarding');
+  //var token = cachHelper.getData(key: 'token');
   // print(onBoarding);
 
 
-   uId = cachHelper.getData(key: 'uId');
+  uId = cachHelper.getData(key: 'uId');
 
   if (uId != null){
     widget = Home();
   }else{
     if(onBoarding != null){
-    widget = Login();}
+      widget = Login();}
     else{
       widget = OnBoarding();
     }
@@ -67,8 +67,8 @@ void main() async {
   runApp( MyApp(
     // isRtl : isRtl ,
     // translation: translation,
-      startWidget: widget ,
-      isDark: false,
+    startWidget: widget ,
+    isDark: false,
   ));
 }
 
@@ -97,18 +97,17 @@ class MyApp extends StatelessWidget {
 
 
         ),
-        /// dark & light
         BlocProvider(
-        create: (BuildContext context)=> SocialCubit()..changeSocialMode(
-        formSared: isDark)),
+            create: (BuildContext context)=> SocialCubit()..changeSocialMode(
+                formSared: isDark)),
         BlocProvider(
           create: (context) => LocaleCubit()..getSavedLanguage(),
         ),
 
-    //     ///translation
-    //     BlocProvider(
-    // create: (BuildContext context) => SocialCubit()
-    // ..setTranslation(translation: translation),
+        //     ///translation
+        //     BlocProvider(
+        // create: (BuildContext context) => SocialCubit()
+        // ..setTranslation(translation: translation),
 
 
 
@@ -116,169 +115,169 @@ class MyApp extends StatelessWidget {
       ],
       /// dark & light
 
-        child: BlocBuilder<LocaleCubit, ChangeLocaleState>(
+      child: BlocBuilder<LocaleCubit, ChangeLocaleState>(
 
-          builder:(context ,state ){
-            return Sizer(
-              builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
-                return BlocBuilder<SocialCubit,SocialStutes>(
-                  builder: (context,statemode)=>
-                   MaterialApp(
-                    locale: state.locale,
-                    supportedLocales: const [Locale('en'), Locale('ar')],
-                    localizationsDelegates: const [
-                      AppLocalizations.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate
-                    ],
-                    localeResolutionCallback: (deviceLocale, supportedLocales) {
-                      for (var locale in supportedLocales) {
-                        if (deviceLocale != null &&
-                            deviceLocale.languageCode == locale.languageCode) {
-                          return deviceLocale;
+        builder:(context ,state ){
+          return Sizer(
+            builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
+              return BlocBuilder<SocialCubit,SocialStutes>(
+                builder: (context,statemode)=>
+                    MaterialApp(
+                      locale: state.locale,
+                      supportedLocales: const [Locale('en'), Locale('ar')],
+                      localizationsDelegates: const [
+                        AppLocalizations.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate
+                      ],
+                      localeResolutionCallback: (deviceLocale, supportedLocales) {
+                        for (var locale in supportedLocales) {
+                          if (deviceLocale != null &&
+                              deviceLocale.languageCode == locale.languageCode) {
+                            return deviceLocale;
+                          }
                         }
-                      }
 
-                      return supportedLocales.first;
-                    },
+                        return supportedLocales.first;
+                      },
 
-                    debugShowCheckedModeBanner: false,
-                    theme: ThemeData(
-                      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-
-                        selectedItemColor: HexColor('#2888ff'),
-
-                      ),
-                      textTheme: TextTheme(
-                        bodyText1: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.black,
-                        ),
-                        headline4:  TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-
-
-                      ),
-                      appBarTheme: AppBarTheme(
-
-                        iconTheme: IconThemeData(
-                            color: HexColor('#2888ff'),
-                            size: 30
-                        ),
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        elevation: 0.0,
-
-                        systemOverlayStyle: SystemUiOverlayStyle(
-                          statusBarColor: Theme.of(context).scaffoldBackgroundColor,
-                          statusBarIconBrightness: Brightness.dark,
-
-                        ),
-
-
-
-                      ),
-
-                      inputDecorationTheme: InputDecorationTheme(
-                        filled: true,
-                        fillColor: Colors.grey[120],
-
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: HexColor('#2888ff'),),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color:HexColor('#2888ff'),),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: HexColor('#2888ff')),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-
-
-                      primarySwatch: Colors.blue,
-                    ),
-                    darkTheme: ThemeData(
-                      scaffoldBackgroundColor: Colors.black,
-                      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                          backgroundColor: Colors.black,
-                          elevation: 2.0,
+                      debugShowCheckedModeBanner: false,
+                      theme: ThemeData(
+                        bottomNavigationBarTheme: BottomNavigationBarThemeData(
 
                           selectedItemColor: HexColor('#2888ff'),
-                          unselectedItemColor: Colors.grey
 
+                        ),
+                        textTheme: TextTheme(
+                          bodyText1: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black,
+                          ),
+                          headline4:  TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+
+
+                        ),
+                        appBarTheme: AppBarTheme(
+
+                          iconTheme: IconThemeData(
+                              color: HexColor('#2888ff'),
+                              size: 30
+                          ),
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          elevation: 0.0,
+
+                          systemOverlayStyle: SystemUiOverlayStyle(
+                            statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+                            statusBarIconBrightness: Brightness.dark,
+
+                          ),
+
+
+
+                        ),
+
+                        inputDecorationTheme: InputDecorationTheme(
+                          filled: true,
+                          fillColor: Colors.grey[120],
+
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: HexColor('#2888ff'),),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color:HexColor('#2888ff'),),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: HexColor('#2888ff')),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+
+
+                        primarySwatch: Colors.blue,
                       ),
-                      appBarTheme: AppBarTheme(
+                      darkTheme: ThemeData(
+                        scaffoldBackgroundColor: Colors.black,
+                        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                            backgroundColor: Colors.black,
+                            elevation: 2.0,
 
-                        iconTheme: IconThemeData(
-                            color: HexColor('#2888ff'),
-                            size: 30
-                        ),
-                        color: Colors.black,
-                        elevation: 5.0,
-
-                        systemOverlayStyle: SystemUiOverlayStyle(
-                          statusBarColor: Theme.of(context).scaffoldBackgroundColor,
-                          statusBarIconBrightness: Brightness.dark,
+                            selectedItemColor: HexColor('#2888ff'),
+                            unselectedItemColor: Colors.grey
 
                         ),
+                        appBarTheme: AppBarTheme(
+
+                          iconTheme: IconThemeData(
+                              color: HexColor('#2888ff'),
+                              size: 30
+                          ),
+                          color: Colors.black,
+                          elevation: 5.0,
+
+                          systemOverlayStyle: SystemUiOverlayStyle(
+                            statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+                            statusBarIconBrightness: Brightness.dark,
+
+                          ),
 
 
 
+                        ),
+                        drawerTheme:DrawerThemeData(
+                            backgroundColor: Colors.black
+                        ) ,
+                        textTheme: TextTheme(
+                          bodyText1: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white,
+                          ),
+                          headline4:  TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+
+                        ),
+
+                        inputDecorationTheme: InputDecorationTheme(
+                          filled: true,
+                          fillColor: Colors.grey[120],
+
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: HexColor('#2888ff'),),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color:HexColor('#2888ff'),),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: HexColor('#2888ff')),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+
+
+                        primarySwatch: Colors.blue,
                       ),
-                      drawerTheme:DrawerThemeData(
-                          backgroundColor: Colors.black
-                      ) ,
-                      textTheme: TextTheme(
-                        bodyText1: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                        ),
-                        headline4:  TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-
-                      ),
-
-                      inputDecorationTheme: InputDecorationTheme(
-                        filled: true,
-                        fillColor: Colors.grey[120],
-
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: HexColor('#2888ff'),),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color:HexColor('#2888ff'),),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: HexColor('#2888ff')),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-
-
-                      primarySwatch: Colors.blue,
+                      themeMode: SocialCubit.get(context).isDark ? ThemeMode.light:ThemeMode.dark,
+                      home: startWidget,
                     ),
-                    themeMode: SocialCubit.get(context).isDark ? ThemeMode.light:ThemeMode.dark,
-                    home: startWidget,
-                  ),
-                );
-              },
+              );
+            },
 
-            );
-          } ,
-        ),
+          );
+        } ,
+      ),
       ///translation2
       // BlocBuilder<LocaleCubit, ChangeLocaleState>(
       //   builder: (context, state) {

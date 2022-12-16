@@ -20,7 +20,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
 
 
-   void createUser (
+  void createUser (
       {
         required String name,
         required String email,
@@ -30,7 +30,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
       }
       ){
 
-      UserModel model = UserModel(
+    UserModel model = UserModel(
       name : name,
       email:email,
       phone:phone,
@@ -65,24 +65,24 @@ class RegisterCubit extends Cubit<RegisterStates> {
     emit(RegisterLoadingStates());
 
     FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,).then((value){
-          print(value.user!.email);
-          print(value.user!.uid);
+      email: email,
+      password: password,).then((value){
+      print(value.user!.email);
+      print(value.user!.uid);
 
-          print('انت كدا تمام من ناحية ادخال البيانات');
+      print('انت كدا تمام من ناحية ادخال البيانات');
 
-         createUser(
-            name : name,
-            email:email,
-            phone:phone,
-            uId:value.user!.uid,
+      createUser(
+        name : name,
+        email:email,
+        phone:phone,
+        uId:value.user!.uid,
 
-          );
-         emit(RegisterSuccessStates());
+      );
+      emit(RegisterSuccessStates());
 
     }).catchError((error){
-          emit(RegisterErrorStates(error.toString()));
+      emit(RegisterErrorStates(error.toString()));
     });
   }
 

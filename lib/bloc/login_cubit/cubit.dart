@@ -17,20 +17,20 @@ class LoginCubit extends Cubit<LoginStates>{
   ShopLoginModel? loginModel;
 
   void userLogin(
-  {
-  required String email,
-    required String password,
-}
+      {
+        required String email,
+        required String password,
+      }
       ){
     emit(LoginLoadingStates());
 
     FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,).then((value) {
-          emit(LoginSuccessStates(uId : value.user!.uid));
-          print('Success');
-          print(value.user!.email);
-          print(value.user!.uid);
+      email: email,
+      password: password,).then((value) {
+      emit(LoginSuccessStates(uId : value.user!.uid));
+      print('Success');
+      print(value.user!.email);
+      print(value.user!.uid);
     }).catchError((error){
       emit(LoginErrorStates(error.toString()));
     });

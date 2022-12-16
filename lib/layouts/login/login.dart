@@ -8,6 +8,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../bloc/login_cubit/cubit.dart';
 import '../../bloc/login_cubit/states.dart';
+import '../../bloc/main_cubit/mian_cubit.dart';
 import '../../shared/components/components.dart';
 import '../main_home/home.dart';
 import '../register/register.dart';
@@ -31,6 +32,29 @@ class Login extends StatelessWidget {
         child: BlocConsumer<LoginCubit, LoginStates>(
           listener: (BuildContext context, Object? state) {
 
+            // if (state is LoginErrorStates){
+            //
+            //   showToast(
+            //       msg: 'الايميل أو الباسورد غير صحيح الرجاء المحاولة مرة اخرى!',
+            //       state: ToastStates.ERORR
+            //   );
+            //
+            //   // cachHelper.saveData(key: 'token', value: false);
+            //
+            // }
+            // else if (state is LoginSuccessStates ){
+            //
+            //   cachHelper.saveData(key: 'uId', value: state.uId).then(
+            //           (value) {
+            //         Navigator.pushAndRemoveUntil(context,
+            //             MaterialPageRoute(builder: (context) => Home()), (route) => false);
+            //       }).catchError((error){
+            //
+            //     print(error.toString());
+            //
+            //   });
+            //
+            // }
             if (state is LoginErrorStates){
 
               showToast(
@@ -40,19 +64,21 @@ class Login extends StatelessWidget {
 
               // cachHelper.saveData(key: 'token', value: false);
 
-            } else if (state is LoginSuccessStates ){
-              
+            }
+            else if (state is LoginSuccessStates ) {
+
               cachHelper.saveData(key: 'uId', value: state.uId).then(
                       (value) {
-                        Navigator.pushAndRemoveUntil(context,
-                            MaterialPageRoute(builder: (context) => Home()), (route) => false);
-                      }).catchError((error){
+                    Navigator.pushAndRemoveUntil(context,
+                        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+                    SocialCubit.get(context).getUserData();
+                  }).catchError((error){
 
-                        print(error.toString());
+                print(error.toString());
 
               });
-              
-                          }
+
+            }
 
           },
           builder: (BuildContext context, state) {
@@ -117,7 +143,7 @@ class Login extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               label: Text(
-                                 "passowrd".tr(context)
+                                  "passowrd".tr(context)
                               ),
                               prefixIcon: Icon(
                                 Icons.lock_outline,
@@ -132,10 +158,10 @@ class Login extends StatelessWidget {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
-                           children: [
-                             TextButton(onPressed: (){}, child: Text(
-                                 "Forget password?".tr(context)))
-                           ],
+                          children: [
+                            TextButton(onPressed: (){}, child: Text(
+                                "Forget password?".tr(context)))
+                          ],
 
                         ),
 
@@ -157,11 +183,11 @@ class Login extends StatelessWidget {
                               },
                               color: HexColor('#2888ff'),
                               textColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
+                              Theme.of(context).scaffoldBackgroundColor,
                               child:
-                                  Text(
-                                      "LOGIN".tr(context)
-                                      , style: TextStyle(fontSize: 28)),
+                              Text(
+                                  "LOGIN".tr(context)
+                                  , style: TextStyle(fontSize: 28)),
                             ),
                           ),
                           fallback: (BuildContext context) =>
@@ -172,11 +198,11 @@ class Login extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                             "don\\'t have an account?".tr(context)
+                              "don\\'t have an account?".tr(context)
                               ,
-                            style: TextStyle(
-                              color: Colors.black54
-                            ),),
+                              style: TextStyle(
+                                  color: Colors.black54
+                              ),),
                             TextButton(
                                 onPressed: () {
                                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Register()), (route) => false);
@@ -187,7 +213,7 @@ class Login extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                         height: 60,
+                          height: 60,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -196,7 +222,7 @@ class Login extends StatelessWidget {
                               radius: 30,
                               backgroundColor:Colors.white ,
                               backgroundImage: AssetImage(
-                               'assets/images/facebook2.png'
+                                  'assets/images/facebook2.png'
                               ),
 
                             ),
@@ -212,7 +238,7 @@ class Login extends StatelessWidget {
                               radius: 30,
                               backgroundColor:Colors.white ,
                               backgroundImage: AssetImage(
-                                  'assets/images/yahoo.png',
+                                'assets/images/yahoo.png',
 
 
                               ),

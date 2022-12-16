@@ -18,13 +18,13 @@ class _ContactUsState extends State<Contact> {
       appBar: AppBar(
         actions: [
           IconButton(
-              icon: Icon(
+            icon: Icon(
                 Icons.brightness_4_outlined
-              ),
-          onPressed: (){
-                SocialCubit.get(context).changeSocialMode(formSared: false);
+            ),
+            onPressed: (){
+              SocialCubit.get(context).changeSocialMode(formSared: false);
 
-          },)
+            },)
         ],
       ),
       bottomNavigationBar: ContactUsBottomAppBar(

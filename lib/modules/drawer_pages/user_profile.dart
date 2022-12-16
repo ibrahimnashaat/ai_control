@@ -49,10 +49,10 @@ class _UserProfileState extends State<UserProfile> {
                 onPressed: () {
                   SocialCubit.get(
                       context).updateUser(
-                      name: nameController.text,
-                      phone: phoneController.text,
-                      email: emailController.text,
-                      bio: bioController.text,
+                    name: nameController.text,
+                    phone: phoneController.text,
+                    email: emailController.text,
+                    bio: bioController.text,
                   );
                 },
                 child: SizedBox(
@@ -89,17 +89,17 @@ class _UserProfileState extends State<UserProfile> {
 
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
-                                    color: Colors.black12,
-                                    image: DecorationImage(
-                                        image: profileCover == null ?NetworkImage(
-                                          '$cover',
-                                        ) : FileImage(profileCover) as ImageProvider,
-                                        fit: BoxFit.cover,
-                                    ),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                  ),
+                                  color: Colors.black12,
+                                  image: DecorationImage(
+                                    image: profileCover == null ?NetworkImage(
+                                      '$cover',
+                                    ) : FileImage(profileCover) as ImageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                               IconButton(
@@ -126,7 +126,7 @@ class _UserProfileState extends State<UserProfile> {
                             CircleAvatar(
                               radius: 60,
                               backgroundColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
+                              Theme.of(context).scaffoldBackgroundColor,
                               child: CircleAvatar(
                                 radius: 56,
                                 backgroundColor: Colors.black12,
@@ -141,7 +141,7 @@ class _UserProfileState extends State<UserProfile> {
                                   radius: 28,
                                   backgroundColor: Colors.lightBlue.withOpacity(0.7),
                                   child: Icon(
-                                      Icons.camera_alt_outlined,
+                                    Icons.camera_alt_outlined,
                                     color: Colors.white,
                                   ),
                                 )
@@ -158,97 +158,97 @@ class _UserProfileState extends State<UserProfile> {
 
                   Text(
                     '${model?.name??'loading..'}',
-                  style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                   Text(
                     '${model?.bio??'loading..'}',
-                  style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                   SizedBox(
                     height: 6.h,
                   ),
-                 if (SocialCubit.get(context).CoverImage != null || SocialCubit.get(context).ProfileImage != null )
+                  if (SocialCubit.get(context).CoverImage != null || SocialCubit.get(context).ProfileImage != null )
                     Row(
-                   children: [
-                     if(SocialCubit.get(context).CoverImage != null)
+                      children: [
+                        if(SocialCubit.get(context).CoverImage != null)
 
                           Expanded(
-                           child:  Column(
-                             children: [
-                               Container(
-                                 width: double.infinity,
-                                 child: OutlinedButton(
-                                     onPressed: (){
-                                       SocialCubit.get(context).upLoudProfilCover(
-                                           name: nameController.text,
-                                           phone: phoneController.text,
-                                           email: emailController.text,
-                                           bio: bioController.text);
-                                     },
-                                     child: Text(
-                                       "Update Cover".tr(context),
-                                     style: Theme.of(context).textTheme.bodyText1,
-                                     ),
-                                   style: OutlinedButton.styleFrom(
+                            child:  Column(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  child: OutlinedButton(
+                                    onPressed: (){
+                                      SocialCubit.get(context).upLoudProfilCover(
+                                          name: nameController.text,
+                                          phone: phoneController.text,
+                                          email: emailController.text,
+                                          bio: bioController.text);
+                                    },
+                                    child: Text(
+                                      "Update Cover".tr(context),
+                                      style: Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                    style: OutlinedButton.styleFrom(
 
-                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                                   ),
-                                 ),
-                               ),
-                               if(state is SocialUserUpdateLoadingStates)
-                               SizedBox(
-                                 height: 1.h,
-                               ),
-                               if(state is SocialUserUpdateLoadingStates)
-                               LinearProgressIndicator(),
-                             ],
-                           ),
-                     ),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                                    ),
+                                  ),
+                                ),
+                                if(state is SocialUserUpdateLoadingStates)
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                if(state is SocialUserUpdateLoadingStates)
+                                  LinearProgressIndicator(),
+                              ],
+                            ),
+                          ),
 
 
 
-                     SizedBox(
-                       width: 2.w,
-                     ),
-                     if(SocialCubit.get(context).ProfileImage != null)
+                        SizedBox(
+                          width: 2.w,
+                        ),
+                        if(SocialCubit.get(context).ProfileImage != null)
 
-                         Expanded(
-                           child:  Column(
-                             children: [
-                               OutlinedButton(
-                                   onPressed: (){
-                                     SocialCubit.get(context).upLoudProfilImage(
-                                         name: nameController.text,
-                                         phone: phoneController.text,
-                                         email: emailController.text,
-                                         bio: bioController.text);
-                                   },
-                                   child: Text(
+                          Expanded(
+                            child:  Column(
+                              children: [
+                                OutlinedButton(
+                                  onPressed: (){
+                                    SocialCubit.get(context).upLoudProfilImage(
+                                        name: nameController.text,
+                                        phone: phoneController.text,
+                                        email: emailController.text,
+                                        bio: bioController.text);
+                                  },
+                                  child: Text(
                                     "Update Image".tr(context),
-                                   style: Theme.of(context).textTheme.bodyText1,
-                                   ),
-                                 style: OutlinedButton.styleFrom(
-                                   minimumSize: Size(100, 50),
-                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                                 ),
-                               ),
-                               if(state is SocialUserUpdateLoadingStates)
-                               SizedBox(
-                                 height: 1.h,
-                               ),
-                               if(state is SocialUserUpdateLoadingStates)
-                               LinearProgressIndicator(),
-                             ],
-                           ),
-                         ),
+                                    style: Theme.of(context).textTheme.bodyText1,
+                                  ),
+                                  style: OutlinedButton.styleFrom(
+                                    minimumSize: Size(100, 50),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                                  ),
+                                ),
+                                if(state is SocialUserUpdateLoadingStates)
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                if(state is SocialUserUpdateLoadingStates)
+                                  LinearProgressIndicator(),
+                              ],
+                            ),
+                          ),
 
 
-                   ],
-                 ),
+                      ],
+                    ),
                   if (SocialCubit.get(context).CoverImage != null || SocialCubit.get(context).ProfileImage != null )
                     SizedBox(
-                    height: 6.h,
-                  ),
+                      height: 6.h,
+                    ),
                   TextFormField(
                     controller: nameController,
                     keyboardType: TextInputType.text,
@@ -264,7 +264,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                       label: Text(
                         "User Name".tr(context),
-                      style: Theme.of(context).textTheme.bodyText1,),
+                        style: Theme.of(context).textTheme.bodyText1,),
                       prefixIcon: Icon(
 
                         Icons.person,
@@ -289,7 +289,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                       label: Text(
                         "BIO".tr(context),
-                      style: Theme.of(context).textTheme.bodyText1,),
+                        style: Theme.of(context).textTheme.bodyText1,),
                       prefixIcon: Icon(
                         Icons.info_outline,
                       ),
@@ -313,7 +313,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                       label: Text(
                         "phone".tr(context),
-                      style: Theme.of(context).textTheme.bodyText1,),
+                        style: Theme.of(context).textTheme.bodyText1,),
                       prefixIcon: Icon(
                         Icons.phone,
                       ),
@@ -337,7 +337,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                       label: Text(
                         "e-mail".tr(context),
-                      style: Theme.of(context).textTheme.bodyText1,),
+                        style: Theme.of(context).textTheme.bodyText1,),
                       prefixIcon: Icon(
                         Icons.email_outlined,
                       ),

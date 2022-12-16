@@ -40,9 +40,9 @@ class cachHelper {
     return await sharedPreferences!.setBool(key, value);
   }
   static bool? getBoolean(
-  {
-  required String key,
-}
+      {
+        required String key,
+      }
       )
   {
     return sharedPreferences?.getBool(key);
@@ -56,21 +56,21 @@ class cachHelper {
 //     required String ar,
 //     required String en,
 //   }) => isRtl ? ar : en;
-  ///translation2
-  // Future<void> cacheLanguageCode(String languageCode) async {
-  // final sharedPreferences = await SharedPreferences.getInstance();
-  // sharedPreferences.setString("LOCALE", languageCode);
-  // }
-  //
-  // Future<String> getCachedLanguageCode() async {
-  // final sharedPreferences = await SharedPreferences.getInstance();
-  // final cachedLanguageCode = sharedPreferences.getString("LOCALE");
-  // if (cachedLanguageCode != null) {
-  // return cachedLanguageCode;
-  // } else {
-  // return "en";
-  // }
-  // }
+///translation2
+// Future<void> cacheLanguageCode(String languageCode) async {
+// final sharedPreferences = await SharedPreferences.getInstance();
+// sharedPreferences.setString("LOCALE", languageCode);
+// }
+//
+// Future<String> getCachedLanguageCode() async {
+// final sharedPreferences = await SharedPreferences.getInstance();
+// final cachedLanguageCode = sharedPreferences.getString("LOCALE");
+// if (cachedLanguageCode != null) {
+// return cachedLanguageCode;
+// } else {
+// return "en";
+// }
+// }
 
 
 

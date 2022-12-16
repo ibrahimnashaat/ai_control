@@ -53,8 +53,8 @@ class _DownloadState extends State<Download> {
                           Container(
                             margin: EdgeInsets.only(left: 6, top: 10),
                             child: Text(
-                              "Patient Informations!".tr(context),
-                              style: Theme.of(context).textTheme.headline4
+                                "Patient Informations!".tr(context),
+                                style: Theme.of(context).textTheme.headline4
                             ),
                           ),
                           SizedBox(
@@ -62,7 +62,7 @@ class _DownloadState extends State<Download> {
                           ),
                           Container(
                             margin:
-                                EdgeInsets.only(left: 6, right: 4, bottom: 10),
+                            EdgeInsets.only(left: 6, right: 4, bottom: 10),
                             child: Text(
                               "please connect the ECG device before you click on the start button!".tr(context),
                               style: Theme.of(context).textTheme.bodyText1,
@@ -128,8 +128,8 @@ class _DownloadState extends State<Download> {
                           child: Row(
                             children: [
                               Text(
-                                "Patient phone number : ".tr(context),
-                                style: Theme.of(context).textTheme.bodyText1
+                                  "Patient phone number : ".tr(context),
+                                  style: Theme.of(context).textTheme.bodyText1
                               ),
                               Expanded(
                                 child: Text(
@@ -166,7 +166,7 @@ class _DownloadState extends State<Download> {
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
                               Text(
-                               "Negative".tr(context),
+                                "Negative".tr(context),
                                 style:  TextStyle(color: Colors.blueGrey),
                               ),
                             ],
@@ -239,9 +239,9 @@ class _DownloadState extends State<Download> {
                                 information: "Abu Hammad, Asharqia,Egypt".tr(context),
                               ),
                               InvoiceItem(
-                                description: "Patient State".tr(context),
-                                date: DateTime.now(),
-                               information: "Negative".tr(context)
+                                  description: "Patient State".tr(context),
+                                  date: DateTime.now(),
+                                  information: "Negative".tr(context)
                               ),
 
                             ],
