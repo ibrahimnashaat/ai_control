@@ -20,6 +20,7 @@ import 'dart:math' as math;
 import 'package:firebase_database/firebase_database.dart';
 
 import '../../app_localizations.dart';
+import 'dl_model/test_result.dart';
 
 class Patient extends StatefulWidget {
   const Patient({Key? key}) : super(key: key);

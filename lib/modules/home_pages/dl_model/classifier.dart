@@ -70,17 +70,17 @@ class Classifier {
     InterpreterOptions interpreterOptions = InterpreterOptions();
 
     // Track how long it took to do inference
-    int startTime = new DateTime.now().millisecondsSinceEpoch;
+    int startTime =  DateTime.now().millisecondsSinceEpoch;
 
     try {
       Interpreter interpreter = await Interpreter.fromAsset("model.tflite",
           options: interpreterOptions);
       interpreter.run(input, output);
     } catch (e) {
-      print('Error loading or running model: ' + e.toString());
+      print('Error loading or running model: ${e.toString()}');
     }
 
-    int endTime = new DateTime.now().millisecondsSinceEpoch;
+    int endTime =  DateTime.now().millisecondsSinceEpoch;
     print("Inference took ${endTime - startTime} ms");
 
     // Obtain the highest score from the output of the model
@@ -90,7 +90,7 @@ class Classifier {
     for (int i = 0; i < output[0].length; i++) {
       if (output[0][i] > highestProb) {
         highestProb = output[0][i];
-        digitPred = i as String;
+        digitPred = i.toString();
       }
     }
     return highestProb;
