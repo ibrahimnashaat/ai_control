@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:sizer/sizer.dart';
 
 
 import '../../bloc/main_cubit/mian_cubit.dart';
@@ -22,6 +23,8 @@ class _RegisterState extends State<Register> {
   var nameController = TextEditingController();
 
   var emailController = TextEditingController();
+  var ageController = TextEditingController();
+  var addressController = TextEditingController();
 
   var phoneController = TextEditingController();
 
@@ -31,6 +34,8 @@ class _RegisterState extends State<Register> {
   var formKey = GlobalKey<FormState>();
 
   final database = FirebaseDatabase.instance.ref();
+
+   String? type ;
 
   // late String birthDateInString;
   //
@@ -55,17 +60,7 @@ class _RegisterState extends State<Register> {
 
 
             }
-            // if (state is RegisterCreateUserSuccessStates) {
-            //   cachHelper.saveData(key: 'uId', value: state.uId).then(
-            //           (value) {
-            //         Navigator.pushAndRemoveUntil(context,
-            //             MaterialPageRoute(builder: (context) => Home()), (route) => false);
-            //       }).catchError((error){
-            //
-            //     print(error.toString());
-            //
-            //   });
-            // }
+
           },
           builder: (BuildContext context, state) {
             return Padding(
@@ -140,6 +135,52 @@ class _RegisterState extends State<Register> {
                           height: 16,
                         ),
                         TextFormField(
+                          controller: ageController,
+                          keyboardType: TextInputType.number,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'enter your age';
+                            }
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            label: Text(
+                                "Enter age".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1),
+                            prefixIcon: Icon(
+                              Icons.numbers,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        TextFormField(
+                          controller: addressController,
+                          keyboardType: TextInputType.streetAddress,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'enter your address';
+                            }
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            label: Text(
+                                "Enter address".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1),
+                            prefixIcon: Icon(
+                              Icons.place,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        TextFormField(
                           controller: phoneController,
                           keyboardType: TextInputType.phone,
                           validator: (value) {
@@ -195,6 +236,80 @@ class _RegisterState extends State<Register> {
                         SizedBox(
                           height: 16,
                         ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Text('Please Select Your Gender :',
+                           style: TextStyle(
+                             fontSize: 20.sp,
+                             fontWeight: FontWeight.bold,
+                             color: Colors.lightBlue
+                           ),
+                        ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: type=='Male' ? HexColor('#2888ff') : Colors.grey,
+                                  ),
+                                  child: MaterialButton(
+
+                                    onPressed: (){
+                                      setState(() {
+
+                                        type ='Male';
+
+
+                                      });
+                                    },
+                                    child: Text(
+                                      'Male',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color:  Theme.of(context).scaffoldBackgroundColor,
+                                      ),
+                                    ),
+
+                                  ),
+                                ),),
+                                SizedBox(width: 6.h,),
+                                Expanded(child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color:type == 'Female' ? HexColor('#2888ff') :Colors.grey  ,
+                                  ),
+                                  child: MaterialButton(
+
+                                    onPressed: (){
+                                      setState(() {
+
+                                        type = 'Female';
+
+
+                                      });
+                                    },
+                                    child: Text(
+                                      'Female',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color: Theme.of(context).scaffoldBackgroundColor  ,
+                                      ),
+                                    ),
+
+                                  ),
+                                ),),
+                              ],
+                            ),
+
+                          ],
+                        ),
 
 
 
@@ -224,7 +339,7 @@ class _RegisterState extends State<Register> {
                         SizedBox(
                           height: 26,
                         ),
-                        ConditionalBuilder(
+                       type == null ? Container():  ConditionalBuilder(
                           condition: state != RegisterLoadingStates,
                           builder: (BuildContext context) => Container(
                             width: double.infinity,
@@ -238,8 +353,12 @@ class _RegisterState extends State<Register> {
                                   RegisterCubit.get(context).userRegister(
                                     name: nameController.text,
                                     email: emailController.text,
+                                    age: ageController.text,
+                                    address: addressController.text,
+                                    type: type??'unknown',
                                     phone: phoneController.text,
                                     password: passwordController.text,
+                                    context: context,
 
 
                                   );
@@ -250,7 +369,7 @@ class _RegisterState extends State<Register> {
                               Theme.of(context).scaffoldBackgroundColor,
                               child: Text(
                                   "REGISTER".tr(context),
-                                  style: Theme.of(context).textTheme.bodyText1),
+                                  style: Theme.of(context).textTheme.headline4),
 
                             ),
                           ),
@@ -277,7 +396,7 @@ class _RegisterState extends State<Register> {
                               },
                               child: Text(
                                   "LOGIN".tr(context),
-                                  style: Theme.of(context).textTheme.bodyText1),
+                                  ),
                             )
                           ],
                         ),

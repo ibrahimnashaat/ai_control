@@ -1,6 +1,8 @@
 import 'package:ai_control/app_localizations.dart';
 import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -9,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import '../../bloc/login_cubit/cubit.dart';
 import '../../bloc/login_cubit/states.dart';
 import '../../bloc/main_cubit/mian_cubit.dart';
+import '../../models/class_user_model.dart';
 import '../../shared/components/components.dart';
 import '../main_home/home.dart';
 import '../register/register.dart';
@@ -32,33 +35,15 @@ class Login extends StatelessWidget {
         child: BlocConsumer<LoginCubit, LoginStates>(
           listener: (BuildContext context, Object? state) {
 
-            // if (state is LoginErrorStates){
-            //
-            //   showToast(
-            //       msg: 'الايميل أو الباسورد غير صحيح الرجاء المحاولة مرة اخرى!',
-            //       state: ToastStates.ERORR
-            //   );
-            //
-            //   // cachHelper.saveData(key: 'token', value: false);
-            //
-            // }
-            // else if (state is LoginSuccessStates ){
-            //
-            //   cachHelper.saveData(key: 'uId', value: state.uId).then(
-            //           (value) {
-            //         Navigator.pushAndRemoveUntil(context,
-            //             MaterialPageRoute(builder: (context) => Home()), (route) => false);
-            //       }).catchError((error){
-            //
-            //     print(error.toString());
-            //
-            //   });
-            //
-            // }
+
+
+
+
+
             if (state is LoginErrorStates){
 
               showToast(
-                  msg: 'الايميل أو الباسورد غير صحيح الرجاء المحاولة مرة اخرى!',
+                  msg: 'Email or Password not true, please try again.',
                   state: ToastStates.ERORR
               );
 
@@ -69,9 +54,27 @@ class Login extends StatelessWidget {
 
               cachHelper.saveData(key: 'uId', value: state.uId).then(
                       (value) {
-                    Navigator.pushAndRemoveUntil(context,
-                        MaterialPageRoute(builder: (context) => Home()), (route) => false);
                     SocialCubit.get(context).getUserData();
+                    UserModel? userModel ;
+
+                    final uId = FirebaseAuth.instance.currentUser?.uid;
+                    FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
+                      userModel=UserModel.fromJson(value.data()!);
+                        Navigator.pushAndRemoveUntil(context,
+                            MaterialPageRoute(builder: (context) => const Home()), (route) => false);
+                        cachHelper.saveData(key: 'type', value: 'user');
+
+
+
+                    }).catchError((e){
+                      print(e.toString());
+                    });
+
+
+
+
+
+
                   }).catchError((error){
 
                 print(error.toString());
@@ -178,7 +181,9 @@ class Login extends StatelessWidget {
                                 if (formKey.currentState!.validate()) {
                                   LoginCubit.get(context).userLogin(
                                       email: emailController.text,
-                                      password: passwordController.text);
+                                      password: passwordController.text,
+                                      context: context,
+                                  );
                                 }
                               },
                               color: HexColor('#2888ff'),

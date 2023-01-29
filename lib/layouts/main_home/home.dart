@@ -1,21 +1,14 @@
 import 'package:ai_control/bloc/main_cubit/main_states.dart';
-import 'package:ai_control/bloc/register_cubit/cubit.dart';
 import 'package:ai_control/layouts/main_home/drawer.dart';
-import 'package:ai_control/shared/local/cach_helper/cach_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:sizer/sizer.dart';
 
-import '../../bloc/main_cubit/main_states.dart';
 
 import '../../bloc/main_cubit/mian_cubit.dart';
 import '../../bloc/main_home_cubit/cubit.dart';
 import '../../bloc/main_home_cubit/states.dart';
-import '../../modules/drawer_pages/about_us.dart';
-import '../../modules/drawer_pages/contact_us.dart';
-import '../../modules/home_pages/download.dart';
-import '../login/login.dart';
+
 
 
 class Home extends StatefulWidget {
@@ -42,6 +35,7 @@ class _HomeState extends State<Home> {
 
             appBar: AppBar(
 
+
               actions: [
                 BlocBuilder<SocialCubit,SocialStutes>(
                   builder: (context,state){
@@ -49,12 +43,12 @@ class _HomeState extends State<Home> {
                       onPressed: (){
                         SocialCubit.get(context).changeSocialMode(formSared:false);
                       },
-                      icon: Icon(Icons.brightness_4_outlined),
+                      icon: const Icon(Icons.brightness_4_outlined),
                     );
                   },
 
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,),
 
                 BlocConsumer<LocaleCubit, ChangeLocaleState>(
@@ -89,10 +83,11 @@ class _HomeState extends State<Home> {
                 cubit.changeBottomNavBar(index);
               },
               items: cubit.bottomNavItems,
+
               elevation: 10,
 
             ),
-            drawer: Drawers(),
+            drawer: const Drawers(),
 
 
           );

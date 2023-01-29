@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   void _activateListeners() async{
     _streamSubscription = _database.child("Signals").onValue.listen((event) {
-      final Object? description = event.snapshot.value;
+      final Object description = event.snapshot.value ??0;
       setState((){
         _displayText = int.parse('$description');
         print (_displayText);

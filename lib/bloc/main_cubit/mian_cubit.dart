@@ -82,6 +82,9 @@ class SocialCubit extends Cubit<SocialStutes> {
     required String name,
     required String phone,
     required String email,
+    required String age,
+    required String address,
+    required String type,
     required String bio,
   }) {
     emit(SocialUserUpdateLoadingStates());
@@ -96,6 +99,9 @@ class SocialCubit extends Cubit<SocialStutes> {
           name: name,
           phone: phone,
           email: email,
+          age: age,
+          type: type,
+          address: address,
           image: value,
         );
 
@@ -113,6 +119,9 @@ class SocialCubit extends Cubit<SocialStutes> {
     required String name,
     required String phone,
     required String email,
+    required String age,
+    required String address,
+    required String type,
     required String bio,
 
   }) {
@@ -129,6 +138,9 @@ class SocialCubit extends Cubit<SocialStutes> {
           name: name,
           phone: phone,
           email: email,
+          type: type,
+          age: age,
+          address: address,
           cover: value,
         );
 
@@ -175,6 +187,9 @@ class SocialCubit extends Cubit<SocialStutes> {
   void updateUser({ required String name,
     required String phone,
     required String email,
+    required String age,
+    required String address,
+    required String type,
     required String bio,
     String? image,
     String? cover,}) {
@@ -183,6 +198,9 @@ class SocialCubit extends Cubit<SocialStutes> {
       name: name,
       bio: bio,
       email: email,
+      age: age,
+      address: address,
+      type: type,
       cover: cover ?? userModel?.cover,
       image: image ?? userModel?.image,
       uId: userModel?.uId,

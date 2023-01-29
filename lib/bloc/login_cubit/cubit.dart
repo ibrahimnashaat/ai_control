@@ -20,9 +20,18 @@ class LoginCubit extends Cubit<LoginStates>{
       {
         required String email,
         required String password,
+        required BuildContext context,
       }
       ){
     emit(LoginLoadingStates());
+    showDialog(
+      context: context,
+      builder:(context){
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
 
     FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,

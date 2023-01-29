@@ -123,6 +123,7 @@ class MyApp extends StatelessWidget {
               return BlocBuilder<SocialCubit,SocialStutes>(
                 builder: (context,statemode)=>
                     MaterialApp(
+
                       locale: state.locale,
                       supportedLocales: const [Locale('en'), Locale('ar')],
                       localizationsDelegates: const [
@@ -150,15 +151,15 @@ class MyApp extends StatelessWidget {
 
                         ),
                         textTheme: TextTheme(
-                          bodyText1: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black,
+                          bodyText1:TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.black54
                           ),
-                          headline4:  TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                          headline4: TextStyle(
+                              fontSize: 26.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).scaffoldBackgroundColor
                           ),
 
 
@@ -169,11 +170,11 @@ class MyApp extends StatelessWidget {
                               color: HexColor('#2888ff'),
                               size: 30
                           ),
-                          color: Theme.of(context).scaffoldBackgroundColor,
+                          color:Colors.white,
                           elevation: 0.0,
 
                           systemOverlayStyle: SystemUiOverlayStyle(
-                            statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+                            statusBarColor: Colors.white,
                             statusBarIconBrightness: Brightness.dark,
 
                           ),
@@ -204,13 +205,18 @@ class MyApp extends StatelessWidget {
                         primarySwatch: Colors.blue,
                       ),
                       darkTheme: ThemeData(
+
+
+                        backgroundColor: Colors.black,
+
+
                         scaffoldBackgroundColor: Colors.black,
                         bottomNavigationBarTheme: BottomNavigationBarThemeData(
                             backgroundColor: Colors.black,
                             elevation: 2.0,
 
                             selectedItemColor: HexColor('#2888ff'),
-                            unselectedItemColor: Colors.grey
+                            unselectedItemColor: Colors.white.withOpacity(0.5),
 
                         ),
                         appBarTheme: AppBarTheme(
@@ -223,8 +229,8 @@ class MyApp extends StatelessWidget {
                           elevation: 5.0,
 
                           systemOverlayStyle: SystemUiOverlayStyle(
-                            statusBarColor: Theme.of(context).scaffoldBackgroundColor,
-                            statusBarIconBrightness: Brightness.dark,
+                            statusBarColor: Colors.black,
+                            statusBarIconBrightness: Brightness.light,
 
                           ),
 
@@ -235,18 +241,19 @@ class MyApp extends StatelessWidget {
                             backgroundColor: Colors.black
                         ) ,
                         textTheme: TextTheme(
-                          bodyText1: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.white,
+                          bodyText1:TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w300,
+                              color: Theme.of(context).scaffoldBackgroundColor
                           ),
                           headline4:  TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                              fontSize: 26.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).scaffoldBackgroundColor
                           ),
 
                         ),
+
 
                         inputDecorationTheme: InputDecorationTheme(
                           filled: true,
@@ -268,6 +275,7 @@ class MyApp extends StatelessWidget {
 
 
                         primarySwatch: Colors.blue,
+
                       ),
                       themeMode: SocialCubit.get(context).isDark ? ThemeMode.light:ThemeMode.dark,
                       home: startWidget,

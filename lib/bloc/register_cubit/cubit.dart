@@ -24,15 +24,22 @@ class RegisterCubit extends Cubit<RegisterStates> {
       {
         required String name,
         required String email,
+        required String address,
+        required String type,
+        required String age,
         required String phone,
         required String uId,
 
       }
       ){
 
+
     UserModel model = UserModel(
       name : name,
       email:email,
+      age:age,
+      address:address,
+      type:type,
       phone:phone,
       uId:uId,
       isEmailVerified: false,
@@ -57,13 +64,24 @@ class RegisterCubit extends Cubit<RegisterStates> {
   void userRegister({
     required String name,
     required String email,
+    required String age,
+    required String address,
+    required String type,
     required String phone,
     required String password,
+    required BuildContext context,
 
 
   }) {
     emit(RegisterLoadingStates());
-
+    showDialog(
+      context: context,
+      builder:(context){
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
     FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
       password: password,).then((value){
@@ -75,6 +93,9 @@ class RegisterCubit extends Cubit<RegisterStates> {
       createUser(
         name : name,
         email:email,
+        age:age,
+        address:address,
+        type:type,
         phone:phone,
         uId:value.user!.uid,
 

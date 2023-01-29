@@ -1,6 +1,9 @@
 class UserModel {
    String? name;
    String? email;
+   String? address;
+   String? type;
+   String? age;
    String? phone;
    String? image;
    String? bio;
@@ -12,6 +15,9 @@ class UserModel {
   UserModel({
     required this.name,
     required this.email,
+    required this.age,
+    required this.address,
+    required this.type,
     required this.phone,
     required this.uId,
     required this.image,
@@ -25,6 +31,9 @@ class UserModel {
 
     name = json['name'];
     email = json['email'];
+    age = json['age'];
+    address = json['address'];
+    type = json['type'];
     phone = json['phone'];
     uId = json['uId'];
     image = json['image'];
@@ -39,6 +48,9 @@ class UserModel {
     return {
       'name' : name,
       'email' : email,
+      'age' : age,
+      'address' : address,
+      'type' : type,
       'phone' : phone,
       'uId' : uId,
       'image':image,

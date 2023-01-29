@@ -19,6 +19,7 @@ class Drawers extends StatelessWidget {
 
  @override
  Widget build(BuildContext context) {
+  bool isDark = !cachHelper.getData(key: 'isDark');
   return BlocConsumer<SocialCubit,SocialStutes>(
    listener: (context, state){},
    builder: (context,state){
@@ -31,6 +32,13 @@ class Drawers extends StatelessWidget {
 
 
      child: Container(
+
+      decoration: BoxDecoration(
+       image: DecorationImage(
+        image: AssetImage(isDark ?'' : 'assets/images/background.jpg'),
+        fit: BoxFit.cover
+       )
+      ),
 
       child: Padding(
        padding: const EdgeInsets.all(8.0),

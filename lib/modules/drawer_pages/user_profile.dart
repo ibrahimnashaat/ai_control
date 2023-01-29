@@ -17,6 +17,9 @@ class _UserProfileState extends State<UserProfile> {
   var bioController = TextEditingController();
   var phoneController = TextEditingController();
   var emailController = TextEditingController();
+  var ageController = TextEditingController();
+  var addressController = TextEditingController();
+   String? type ;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialStutes>(
@@ -31,6 +34,9 @@ class _UserProfileState extends State<UserProfile> {
         bioController.text = model?.bio??'loading..';
         phoneController.text = model?.phone??'loading..';
         emailController.text = model?.email??'loading..';
+        type = model?.type??'loading..';
+        ageController.text = model?.age??'loading..';
+        addressController.text = model?.address??'loading..';
         var profileImage = SocialCubit.get(context).ProfileImage;
         var profileCover = SocialCubit.get(context).CoverImage;
 
@@ -52,6 +58,9 @@ class _UserProfileState extends State<UserProfile> {
                     name: nameController.text,
                     phone: phoneController.text,
                     email: emailController.text,
+                    age: ageController.text,
+                    type:type??'',
+                    address: addressController.text,
                     bio: bioController.text,
                   );
                 },
@@ -183,6 +192,9 @@ class _UserProfileState extends State<UserProfile> {
                                           name: nameController.text,
                                           phone: phoneController.text,
                                           email: emailController.text,
+                                          age: ageController.text,
+                                          type:type ??'',
+                                          address: addressController.text,
                                           bio: bioController.text);
                                     },
                                     child: Text(
@@ -221,6 +233,9 @@ class _UserProfileState extends State<UserProfile> {
                                         name: nameController.text,
                                         phone: phoneController.text,
                                         email: emailController.text,
+                                        age: ageController.text,
+                                        type:type??'',
+                                        address: addressController.text,
                                         bio: bioController.text);
                                   },
                                   child: Text(
