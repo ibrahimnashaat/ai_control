@@ -15,7 +15,7 @@
     "Update Cover": "Update Cover",
     "Update": "Update",
     "Patient Informations!": "Patient Informations!",
-    "please connect the ECG device before you click on the start button!": "please connect the ECG device before you click on the start button!",
+    "please connect the EMG device before you click on the start button!": "please connect the EMG device before you click on the start button!",
     "Patient Name : ": "Patient Name : ",
     "loading..": "loading..",
     "Patient age : ": "Patient age : ",
@@ -58,5 +58,7 @@
     " predict disease💊":   " predict disease💊",
     "Image will be shown below":  "Image will be shown below",
     "Current Prediction:": "Current Prediction:",
-    "Sc.Shot": "Sc.Shot"
+    "Sc.Shot": "Sc.Shot",
+    "Mahmoud Yousif":"Mahmoud Yousif",
+    "Amal Othman":"Amal Othman"
 }

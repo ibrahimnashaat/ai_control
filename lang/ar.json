@@ -15,7 +15,7 @@
     "Update Cover": "تحميل صوره غلاف",
     "Update": "تحديث",
     "Patient Informations!": "معلومات المريض!",
-    "please connect the ECG device before you click on the start button!": "يرجى توصيل جهاز ECG قبل النقر على زر البدء!",
+    "please connect the EMG device before you click on the start button!": "يرجى توصيل جهاز EMG قبل النقر على زر البدء!",
     "Patient Name : ": "اسم المريض",
     "loading..": "تحميل..",
     "Patient age : ": "عمر المريض",
@@ -58,6 +58,9 @@
     " predict disease💊":  " 💊توقع المرض",
     "Image will be shown below": "سيتم عرض الصورة أدناه",
     "Current Prediction:": "التنبؤ الحالي:",
-    "Sc.Shot": "لقطه شاشه"
+    "Sc.Shot": "لقطه شاشه",
+"Mahmoud Yousif":"محمود يوسف",
+"Amal Othman":"امال عثمان "
+  
 
 }

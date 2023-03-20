@@ -20,15 +20,13 @@ class Download extends StatefulWidget {
 }
 
 class _DownloadState extends State<Download> {
-
-
- String? name  = cachHelper.getData(key: 'name');
-
+  String? name = cachHelper.getData(key: 'name');
+  int? persentage = cachHelper.getData(key: 'persentage');
+// persentage
 
   @override
   Widget build(BuildContext context) {
     bool isDark = !cachHelper.getData(key: 'isDark');
-
 
     return BlocConsumer<SocialCubit, SocialStutes>(
       listener: (BuildContext context, state) {},
@@ -40,10 +38,9 @@ class _DownloadState extends State<Download> {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(isDark ? '' : 'assets/images/background.jpg'),
-                  fit: BoxFit.cover
-              )
-          ),
+                  image:
+                      AssetImage(isDark ? '' : 'assets/images/background.jpg'),
+                  fit: BoxFit.cover)),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -63,7 +60,7 @@ class _DownloadState extends State<Download> {
                         Container(
                           margin: const EdgeInsets.only(left: 6, top: 10),
                           child: Text(
-                              "Patient Informations!".tr(context),
+                            "Patient Informations!".tr(context),
                             style: Theme.of(context).textTheme.headline4,
                           ),
                         ),
@@ -71,10 +68,11 @@ class _DownloadState extends State<Download> {
                           height: 4,
                         ),
                         Container(
-                          margin:
-                          const EdgeInsets.only(left: 6, right: 4, bottom: 10),
+                          margin: const EdgeInsets.only(
+                              left: 6, right: 4, bottom: 10),
                           child: Text(
-                            "please connect the ECG device before you click on the start button!".tr(context),
+                            "please connect the ECG device before you click on the start button!"
+                                .tr(context),
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
@@ -111,11 +109,11 @@ class _DownloadState extends State<Download> {
                           children: [
                             Text(
                               "Patient age : ".tr(context),
-                              style:  Theme.of(context).textTheme.bodyText1,
+                              style: Theme.of(context).textTheme.bodyText1,
                             ),
                             Text(
                               model?.age ?? "loading..".tr(context),
-                              style:  const TextStyle(color: Colors.blueGrey),
+                              style: const TextStyle(color: Colors.blueGrey),
                             ),
                           ],
                         ),
@@ -129,7 +127,7 @@ class _DownloadState extends State<Download> {
                             ),
                             Text(
                               model?.type ?? "loading..".tr(context),
-                              style:  const TextStyle(color: Colors.blueGrey),
+                              style: const TextStyle(color: Colors.blueGrey),
                             ),
                           ],
                         ),
@@ -137,14 +135,12 @@ class _DownloadState extends State<Download> {
                       Expanded(
                         child: Row(
                           children: [
-                            Text(
-                                "Patient phone number : ".tr(context),
-                                style: Theme.of(context).textTheme.bodyText1
-                            ),
+                            Text("Patient phone number : ".tr(context),
+                                style: Theme.of(context).textTheme.bodyText1),
                             Expanded(
                               child: Text(
                                 model?.phone ?? 'loading..'.tr(context),
-                                style:  const TextStyle(color: Colors.blueGrey),
+                                style: const TextStyle(color: Colors.blueGrey),
                               ),
                             ),
                           ],
@@ -176,15 +172,16 @@ class _DownloadState extends State<Download> {
                               style: Theme.of(context).textTheme.bodyText1,
                             ),
                             Text(
-                              name?.tr(context)??'check the device connection',
-                              style:  const TextStyle(color: Colors.blueGrey),
+                              name ?.tr(context) ??
+                                  'check the device connection',
+                              style: const TextStyle(color: Colors.blueGrey),
                             ),
+                            Text(' $persentage%'),
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                    
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
@@ -221,39 +218,35 @@ class _DownloadState extends State<Download> {
                             InvoiceItem(
                               description: "Patient Name",
                               date: DateTime.now(),
-                              information:model?.name ??"loading..",
-
+                              information: model?.name ?? "loading..",
                             ),
                             InvoiceItem(
                               description: "Patient Age",
                               date: DateTime.now(),
-                              information:  model?.age ??"loading..",
-
+                              information: model?.age ?? "loading..",
                             ),
                             InvoiceItem(
                               description: "Patient Gender",
                               date: DateTime.now(),
-                              information:model?.type ??"loading.." ,
-
+                              information: model?.type ?? "loading..",
                             ),
                             InvoiceItem(
                               description: "Patient Phone Number",
                               date: DateTime.now(),
-                              information:  model?.phone ?? "loading..",
-
-
+                              information: model?.phone ?? "loading..",
                             ),
                             InvoiceItem(
                               description: "Patient Location",
                               date: DateTime.now(),
-                              information: model?.address ??"loading..",
+                              information: model?.address ?? "loading..",
                             ),
                             InvoiceItem(
-                                description: "Patient State",
-                                date: DateTime.now(),
-                                information: name??'check the device connection' ,
+                              description: "Patient State",
+                              date: DateTime.now(),
+                              information:
+                                  '$name $persentage%' ?? 'check the device connection',
                             ),
-
+                          
                           ],
                         );
 
@@ -265,15 +258,16 @@ class _DownloadState extends State<Download> {
                       textColor: Theme.of(context).scaffoldBackgroundColor,
                       child: Row(
                         children: [
-                          const Icon(Icons.download_sharp,
-
+                          const Icon(
+                            Icons.download_sharp,
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           Text(
                             "Download".tr(context),
-                            style: Theme.of(context).textTheme.headline4,)
+                            style: Theme.of(context).textTheme.headline4,
+                          )
                         ],
                       ),
                     ),

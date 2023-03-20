@@ -36,341 +36,318 @@ class _PatientState extends State<Patient> {
   final database = FirebaseDatabase.instance.ref();
   bool isLive = false;
   final controller = ScreenshotController();
-  int count=0;
-
-
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
-   bool isDark = !cachHelper.getData(key: 'isDark');
+    bool isDark = !cachHelper.getData(key: 'isDark');
     return Stack(
       children: [
-        isDark ? Container() : Image(
-            image:  AssetImage('assets/images/background.jpg'),
-          fit: BoxFit.cover,
-          height: MediaQuery.of(context).size.height,
-        ),
+        isDark
+            ? Container()
+            : Image(
+                image: AssetImage('assets/images/background.jpg'),
+                fit: BoxFit.cover,
+                height: MediaQuery.of(context).size.height,
+              ),
         Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-            top: 8
-          ),
-          child: Screenshot(
-
-            controller: controller,
-            child: SingleChildScrollView(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height:96.h,
-
-
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      height: 16.h,
-                      child: Container(
-
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(40),
-                            topLeft: Radius.circular(40),
-                          ),
-                          color: HexColor('#2888ff'),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 8),
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 96.h,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 16.h,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(40),
+                          topLeft: Radius.circular(40),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-
-                              child: Container(
-                                margin: EdgeInsets.only(left: 6, top: 2),
-                                child: Text(
-                                  "Good Morning!".tr(context),
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
+                        color: HexColor('#2888ff'),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 6, top: 2),
+                              child: Text(
+                                "Good Morning!".tr(context),
+                                style: Theme.of(context).textTheme.headline4,
                               ),
                             ),
-                            // SizedBox(
-                            //   height: 1,
-                            // ),
-                            Expanded(
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin:
+                                  EdgeInsets.only(left: 6, right: 6, bottom: 2),
+                              child: Text(
+                                "please connect the EMG device before you click on the start button!"
+                                    .tr(context),
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
 
-                              child: Container(
-                                margin: EdgeInsets.only(left: 6, right: 6, bottom: 2),
-                                child: Text(
-                                    "please connect the ECG device before you click on the start button!".tr(context),
-                                   style: Theme.of(context).textTheme.bodyText1,
-                                ),
+                  // isLive
+                  //     ? Expanded(
+                  //     flex: 5,
+                  //     child: MyHomePage()
+                  // )
+                  //     : Expanded(
+                  //   flex: 5,
+                  //   child: Image.asset(
+                  //     'assets/images/12.gif',
+                  //   ),
+                  // ),
+
+                  SizedBox(
+                    height: 3.h
+                  ),
+
+                  isLive
+                      ? Expanded(
+                          child: Screenshot(
+                            controller: controller,
+                            child: MyHomePage(),
+                          ),
+                        )
+                      : Expanded(
+                          child: Image.asset(
+                            'assets/images/12.gif',
+                          ),
+                        ),
+
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  Container(
+                    height: 32.h,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            MaterialButton(
+                              elevation: 8,
+                              minWidth: 120,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  side: BorderSide(color: Colors.blue)),
+                              onPressed: () {
+                                setState(() {
+                                  isLive = true;
+                                });
+
+                                // it takes screen shot of graphe widget and store it in firebase storage.
+
+                                // controller.capture(delay: const Duration(seconds: 12)).then((capturedImage) async {
+                                //   await FirebaseStorage.instance.ref('order').child('orders$count.jpg').putData(capturedImage!);
+                                //
+                                // }).catchError((error){
+                                //   if (kDebugMode) {
+                                //     print(error.toString());
+                                //   }
+                                // });
+                              },
+                              color: HexColor('#2888ff'),
+                              textColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                              child: Text(
+                                "start".tr(context),
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
+                            ),
+                            // Text(
+                            //   '|',
+                            //   style: TextStyle(
+                            //       fontSize: 36,
+                            //       fontWeight: FontWeight.w300,
+                            //       color: Colors.grey),
+                            // ),
+                            MaterialButton(
+                              elevation: 8,
+                              minWidth: 120,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  side: BorderSide(color: Colors.redAccent)),
+                              onPressed: () {
+                                setState(() {
+                                  isLive = false;
+                                });
+                              },
+                              color: Colors.red,
+                              textColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                              child: Text(
+                                "stop".tr(context),
+                                style: Theme.of(context).textTheme.headline4,
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-
-
-                    // isLive
-                    //     ? Expanded(
-                    //     flex: 5,
-                    //     child: MyHomePage()
-                    // )
-                    //     : Expanded(
-                    //   flex: 5,
-                    //   child: Image.asset(
-                    //     'assets/images/12.gif',
-                    //   ),
-                    // ),
-
-                    SizedBox(
-                      height: 3.h,
-                    ),
-
-                    isLive
-                        ? Expanded(
-
-                        child: MyHomePage()
-                    )
-                        : Expanded(
-
-                      child: Image.asset(
-                        'assets/images/12.gif',
-                      ),
-                    ),
-
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                   Container(
-                     height: 32.h,
-                     child: Column(
-                       children: [
-                         Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                           crossAxisAlignment: CrossAxisAlignment.start,
-
-
-                           children: [
-                             MaterialButton(
-                               elevation: 8,
-                               minWidth: 120,
-                               shape: RoundedRectangleBorder(
-                                   borderRadius: BorderRadius.circular(10.0),
-                                   side: BorderSide(color: Colors.blue)),
-                               onPressed: () {
-
-                                 setState(() {
-                                   isLive = true;
-                                 });
-
-                                 // it takes screen shot of graphe widget and store it in firebase storage.
-
-                                 // controller.capture(delay: const Duration(seconds: 12)).then((capturedImage) async {
-                                 //   await FirebaseStorage.instance.ref('order').child('orders$count.jpg').putData(capturedImage!);
-                                 //
-                                 // }).catchError((error){
-                                 //   if (kDebugMode) {
-                                 //     print(error.toString());
-                                 //   }
-                                 // });
-                               },
-                               color:HexColor('#2888ff') ,
-                               textColor: Theme.of(context).scaffoldBackgroundColor,
-                               child: Text(
-                                   "start".tr(context)
-                                   ,  style:Theme.of(context).textTheme.headline4,),
-                             ),
-                             // Text(
-                             //   '|',
-                             //   style: TextStyle(
-                             //       fontSize: 36,
-                             //       fontWeight: FontWeight.w300,
-                             //       color: Colors.grey),
-                             // ),
-                             MaterialButton(
-                               elevation: 8,
-                               minWidth: 120,
-                               shape: RoundedRectangleBorder(
-                                   borderRadius: BorderRadius.circular(10.0),
-                                   side: BorderSide(color: Colors.redAccent)),
-                               onPressed: () {
-                                 setState(() {
-                                   isLive = false;
-                                 });
-
-
-                               },
-                               color: Colors.red,
-                               textColor: Theme.of(context).scaffoldBackgroundColor,
-                               child: Text(
-                                   "stop".tr(context)
-                                   ,  style:Theme.of(context).textTheme.headline4,),
-                             ),
-                           ],
-                         ),
-                         Spacer(),
-                         Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                           crossAxisAlignment: CrossAxisAlignment.start,
-
-
-                           children: [
-                              Stack(
-                                alignment: AlignmentDirectional.center,
-                                children: [
-                                  Container(
-                                    height: 20.h,
-                                    width: 20.h,
-                                    decoration: BoxDecoration(
-                                        color: HexColor('#2888ff').withOpacity(0.4),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(20),
-                                        )
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      FloatingActionButton(
-                                          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                                          onPressed: (){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  result()));
-                                          },
-                                        child: Icon(
-                                          Icons.accessibility_new,
-                                          color:HexColor('#2888ff') ,
-                                        ),
-
-
+                        Spacer(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Stack(
+                              alignment: AlignmentDirectional.center,
+                              children: [
+                                Container(
+                                  height: 20.h,
+                                  width: 20.h,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          HexColor('#2888ff').withOpacity(0.4),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      )),
+                                ),
+                                Column(
+                                  children: [
+                                    FloatingActionButton(
+                                      backgroundColor: Theme.of(context)
+                                          .scaffoldBackgroundColor,
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    result()));
+                                      },
+                                      child: Icon(
+                                        Icons.accessibility_new,
+                                        color: HexColor('#2888ff'),
                                       ),
+                                    ),
+                                    Text(
+                                      "result".tr(context),
+                                      style:
+                                          Theme.of(context).textTheme.headline4,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Stack(
+                              alignment: AlignmentDirectional.center,
+                              children: [
+                                Container(
+                                  height: 20.h,
+                                  width: 20.h,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          HexColor('#2888ff').withOpacity(0.4),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      )),
+                                ),
+                                Column(
+                                  children: [
+                                    FloatingActionButton(
+                                      backgroundColor: Theme.of(context)
+                                          .scaffoldBackgroundColor,
+                                      onPressed: () async {
+                                        final image =
+                                            await controller.capture();
+                                        if (image == null) return;
+                                        await saveImage(image);
+                                      },
+                                      child: Icon(
+                                        Icons.camera_alt_outlined,
+                                        color: HexColor('#2888ff'),
+                                      ),
+                                    ),
+                                    Text(
+                                      "Sc.Shot".tr(context),
+                                      style:
+                                          Theme.of(context).textTheme.headline4,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
 
-                                       Text(
-                                            "result".tr(context)
-
-                                            , style:Theme.of(context).textTheme.headline4,
-                                       ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                             Stack(
-                               alignment: AlignmentDirectional.center,
-                               children: [
-                                 Container(
-                                   height: 20.h,
-                                   width: 20.h,
-                                   decoration: BoxDecoration(
-                                       color: HexColor('#2888ff').withOpacity(0.4),
-                                       borderRadius: BorderRadius.all(
-                                         Radius.circular(20),
-                                       )
-                                   ),
-                                 ),
-                                 Column(
-                                   children: [
-                                     FloatingActionButton(
-                                       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                                       onPressed: () async {
-                                         final image= await controller.capture();
-                                         if(image==null)
-                                           return  ;
-                                         await saveImage(image);
-                                       } ,
-                                       child: Icon(
-                                         Icons.camera_alt_outlined,
-                                         color:HexColor('#2888ff') ,
-                                       ),
-
-
-                                     ),
-
-                                     Text(
-                                       "Sc.Shot".tr(context)
-
-                                       , style: Theme.of(context).textTheme.headline4,
-
-                                     ),
-                                   ],
-                                 ),
-                               ],
-                             ),
-
-
-
-                             // MaterialButton(
-                             //   minWidth: 120,
-                             //   shape: RoundedRectangleBorder(
-                             //       borderRadius: BorderRadius.circular(10.0),
-                             //       side: BorderSide(color: Colors.redAccent)),
-                             //   onPressed: () {
-                             //     Navigator.push(context, MaterialPageRoute(builder: (context) =>  result()));
-                             //   },
-                             //
-                             //   color: Colors.orange,
-                             //   textColor: Theme.of(context).scaffoldBackgroundColor,
-                             //   child: Text(
-                             //       "result".tr(context)
-                             //
-                             //       , style: Theme.of(context).textTheme.headline4),
-                             // ),
-                             // Text(
-                             //   '|',
-                             //   style: TextStyle(
-                             //       fontSize: 36,
-                             //       fontWeight: FontWeight.w300,
-                             //       color: Colors.grey),
-                             // ),
-                             // MaterialButton(
-                             //   minWidth: 120,
-                             //   shape: RoundedRectangleBorder(
-                             //       borderRadius: BorderRadius.circular(10.0),
-                             //       side: BorderSide(color: Colors.redAccent)),
-                             //   onPressed: () async{
-                             //     final image= await controller.capture();
-                             //     if(image==null)
-                             //       return  ;
-                             //     await saveImage(image);
-                             //   },
-                             //   color: Colors.blue,
-                             //   textColor: Theme.of(context).scaffoldBackgroundColor,
-                             //   child: Text(
-                             //       "Sc.Shot".tr(context)
-                             //       , style: Theme.of(context).textTheme.headline4),
-                             // ),
-                           ],
-                         ),
-                         SizedBox(height: 2.h,)
-                       ],
-                     ),
-                   ),
-
-
-
-                  ],
-                ),
+                            // MaterialButton(
+                            //   minWidth: 120,
+                            //   shape: RoundedRectangleBorder(
+                            //       borderRadius: BorderRadius.circular(10.0),
+                            //       side: BorderSide(color: Colors.redAccent)),
+                            //   onPressed: () {
+                            //     Navigator.push(context, MaterialPageRoute(builder: (context) =>  result()));
+                            //   },
+                            //
+                            //   color: Colors.orange,
+                            //   textColor: Theme.of(context).scaffoldBackgroundColor,
+                            //   child: Text(
+                            //       "result".tr(context)
+                            //
+                            //       , style: Theme.of(context).textTheme.headline4),
+                            // ),
+                            // Text(
+                            //   '|',
+                            //   style: TextStyle(
+                            //       fontSize: 36,
+                            //       fontWeight: FontWeight.w300,
+                            //       color: Colors.grey),
+                            // ),
+                            // MaterialButton(
+                            //   minWidth: 120,
+                            //   shape: RoundedRectangleBorder(
+                            //       borderRadius: BorderRadius.circular(10.0),
+                            //       side: BorderSide(color: Colors.redAccent)),
+                            //   onPressed: () async{
+                            //     final image= await controller.capture();
+                            //     if(image==null)
+                            //       return  ;
+                            //     await saveImage(image);
+                            //   },
+                            //   color: Colors.blue,
+                            //   textColor: Theme.of(context).scaffoldBackgroundColor,
+                            //   child: Text(
+                            //       "Sc.Shot".tr(context)
+                            //       , style: Theme.of(context).textTheme.headline4),
+                            // ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
         ),
       ],
     );
-
   }
 
-
-  Future<String> saveImage(Uint8List bytes)async{
+  Future<String> saveImage(Uint8List bytes) async {
     // final directory = await getApplicationDocumentsDirectory();
     // final image = File('${directory.path}/flutter.png');
     // image.writeAsBytesSync(bytes);
     // await Share.share([image.path]);
     await [Permission.storage].request();
     final time = DateTime.now()
-    .toIso8601String()
-    .replaceAll('.' ,'_')
-    .replaceAll(':' ,'_');
+        .toIso8601String()
+        .replaceAll('.', '_')
+        .replaceAll(':', '_');
     final name = 'screenshot_$time';
     final result = await ImageGallerySaver.saveImage(bytes, name: name);
-   return result['filePath'];
+    return result['filePath'];
   }
 }
